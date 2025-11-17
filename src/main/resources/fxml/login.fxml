@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storeapp.ui.LoginController">
+    <padding>
+        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0"/>
+    </padding>
+    
+    <Label text="Retail Store Management System">
+        <font>
+            <Font size="24.0"/>
+        </font>
+    </Label>
+    
+    <Label text="Login">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Label>
+    
+    <TextField fx:id="usernameField" promptText="Username" maxWidth="300.0"/>
+    <PasswordField fx:id="passwordField" promptText="Password" maxWidth="300.0"/>
+    
+    <Button fx:id="loginButton" text="Login" onAction="#handleLogin" maxWidth="300.0"/>
+    
+    <Label fx:id="messageLabel" textFill="RED"/>
+</VBox>
