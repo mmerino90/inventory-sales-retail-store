@@ -61,8 +61,12 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin_dashboard.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) loginButton.getScene().getWindow();
-            stage.setScene(new Scene(root, 1000, 700));
+            Scene scene = new Scene(root, 1000, 700);
+            stage.setScene(scene);
+            stage.show();
+            System.out.println("Dashboard loaded successfully for user: " + user.getUsername());
         } catch (Exception e) {
+            messageLabel.setText("Error loading dashboard: " + e.getMessage());
             e.printStackTrace();
         }
     }

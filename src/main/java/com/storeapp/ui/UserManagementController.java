@@ -26,9 +26,6 @@ public class UserManagementController implements Initializable {
     private TableView<User> usersTable;
 
     @FXML
-    private TableColumn<User, Integer> idColumn;
-
-    @FXML
     private TableColumn<User, String> usernameColumn;
 
     @FXML
@@ -65,7 +62,6 @@ public class UserManagementController implements Initializable {
             return;
         }
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
 

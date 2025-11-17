@@ -62,6 +62,9 @@ public class ProductListController implements Initializable {
     private Button deleteButton;
 
     @FXML
+    private Button clearButton;
+
+    @FXML
     private Button backButton;
 
     private ProductDAO productDAO = new ProductDAO();
@@ -75,6 +78,13 @@ public class ProductListController implements Initializable {
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
+
+        // Auto-populate fields when a row is selected
+        productTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                populateFields(newSelection);
+            }
+        });
 
         loadProducts();
     }
@@ -110,34 +120,63 @@ public class ProductListController implements Initializable {
     @FXML
     public void handleUpdate(ActionEvent event) {
         Product selected = productTable.getSelectionModel().getSelectedItem();
-        if (selected != null) {
-            try {
-                selected.setName(nameField.getText());
-                selected.setDescription(descriptionField.getText());
-                selected.setPrice(Double.parseDouble(priceField.getText()));
-                selected.setQuantity(Integer.parseInt(quantityField.getText()));
-                selected.setCategory(categoryField.getText());
+        if (selected == null) {
+            showAlert("No Selection", "Please select a product from the table to update.");
+            return;
+        }
+        
+        try {
+            selected.setName(nameField.getText());
+            selected.setDescription(descriptionField.getText());
+            selected.setPrice(Double.parseDouble(priceField.getText()));
+            selected.setQuantity(Integer.parseInt(quantityField.getText()));
+            selected.setCategory(categoryField.getText());
 
-                productDAO.updateProduct(selected);
-                loadProducts();
-                clearFields();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            productDAO.updateProduct(selected);
+            loadProducts();
+            clearFields();
+            showAlert("Success", "Product updated successfully!");
+        } catch (NumberFormatException e) {
+            showAlert("Invalid Input", "Please enter valid numbers for price and quantity.");
+        } catch (SQLException e) {
+            showAlert("Error", "Failed to update product: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
     @FXML
     public void handleDelete(ActionEvent event) {
         Product selected = productTable.getSelectionModel().getSelectedItem();
-        if (selected != null) {
-            try {
-                productDAO.deleteProduct(selected.getId());
-                loadProducts();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        if (selected == null) {
+            showAlert("No Selection", "Please select a product from the table to delete.");
+            return;
         }
+        
+        try {
+            productDAO.deleteProduct(selected.getId());
+            loadProducts();
+            clearFields();
+            showAlert("Success", "Product deleted successfully!");
+        } catch (SQLException e) {
+            showAlert("Error", "Failed to delete product: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void populateFields(Product product) {
+        nameField.setText(product.getName());
+        descriptionField.setText(product.getDescription());
+        priceField.setText(String.valueOf(product.getPrice()));
+        quantityField.setText(String.valueOf(product.getQuantity()));
+        categoryField.setText(product.getCategory());
     }
 
     private void clearFields() {
@@ -146,6 +185,12 @@ public class ProductListController implements Initializable {
         priceField.clear();
         quantityField.clear();
         categoryField.clear();
+        productTable.getSelectionModel().clearSelection();
+    }
+
+    @FXML
+    public void handleClear(ActionEvent event) {
+        clearFields();
     }
 
     @FXML

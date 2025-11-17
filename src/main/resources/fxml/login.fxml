@@ -5,27 +5,49 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storeapp.ui.LoginController">
+<VBox alignment="CENTER" spacing="25.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storeapp.ui.LoginController" style="-fx-background-color: linear-gradient(to bottom right, #667eea, #764ba2);">
     <padding>
-        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0"/>
+        <Insets bottom="60.0" left="60.0" right="60.0" top="60.0"/>
     </padding>
     
-    <Label text="Retail Store Management System">
-        <font>
-            <Font size="24.0"/>
-        </font>
-    </Label>
-    
-    <Label text="Login">
-        <font>
-            <Font size="18.0"/>
-        </font>
-    </Label>
-    
-    <TextField fx:id="usernameField" promptText="Username" maxWidth="300.0"/>
-    <PasswordField fx:id="passwordField" promptText="Password" maxWidth="300.0"/>
-    
-    <Button fx:id="loginButton" text="Login" onAction="#handleLogin" maxWidth="300.0"/>
-    
-    <Label fx:id="messageLabel" textFill="RED"/>
+    <!-- Login Card -->
+    <VBox alignment="CENTER" spacing="25.0" style="-fx-background-color: white; -fx-background-radius: 20px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 20, 0, 0, 5); -fx-padding: 50px;">
+        
+        <Label text="🏪 Retail Store" styleClass="title">
+            <font>
+                <Font name="Segoe UI Bold" size="32.0"/>
+            </font>
+        </Label>
+        
+        <Label text="Management System" style="-fx-font-size: 20px; -fx-text-fill: #718096; -fx-font-weight: 600;">
+            <padding>
+                <Insets bottom="10.0"/>
+            </padding>
+        </Label>
+        
+        <Label text="Welcome back! Please login to continue" style="-fx-font-size: 14px; -fx-text-fill: #a0aec0;">
+            <padding>
+                <Insets bottom="20.0"/>
+            </padding>
+        </Label>
+        
+        <VBox spacing="15.0" maxWidth="350.0" minWidth="350.0">
+            <Label text="Username" style="-fx-font-weight: 600; -fx-text-fill: #4a5568;"/>
+            <TextField fx:id="usernameField" promptText="Enter your username" style="-fx-min-height: 45px;"/>
+        </VBox>
+        
+        <VBox spacing="15.0" maxWidth="350.0" minWidth="350.0">
+            <Label text="Password" style="-fx-font-weight: 600; -fx-text-fill: #4a5568;"/>
+            <PasswordField fx:id="passwordField" promptText="Enter your password" style="-fx-min-height: 45px;"/>
+        </VBox>
+        
+        <Button fx:id="loginButton" text="LOGIN" onAction="#handleLogin" maxWidth="350.0" minWidth="350.0" style="-fx-min-height: 48px; -fx-font-size: 15px;">
+            <VBox.margin>
+                <Insets top="15.0"/>
+            </VBox.margin>
+        </Button>
+        
+        <Label fx:id="messageLabel" textFill="#e53e3e" style="-fx-font-size: 13px; -fx-font-weight: 600;"/>
+        
+    </VBox>
 </VBox>

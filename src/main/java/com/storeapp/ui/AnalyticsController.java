@@ -112,12 +112,19 @@ public class AnalyticsController implements Initializable {
                 .limit(10)
                 .forEach(entry -> {
                     String productName = productNames.getOrDefault(entry.getKey(), "Unknown");
-                    series.getData().add(new XYChart.Data<>(productName, entry.getValue()));
+                    // Truncate long names for better display
+                    String displayName = productName.length() > 15 ? productName.substring(0, 12) + "..." : productName;
+                    series.getData().add(new XYChart.Data<>(displayName, entry.getValue()));
                 });
             
             unitsBarChart.getData().clear();
             unitsBarChart.getData().add(series);
-            unitsBarChart.setTitle("Top 10 Products by Units Sold");
+            unitsBarChart.setLegendVisible(false);
+            
+            // Style the chart
+            xAxis.setLabel("Product Name");
+            yAxis.setLabel("Units Sold");
+            xAxis.setTickLabelRotation(45);
             
         } catch (SQLException e) {
             e.printStackTrace();
@@ -127,6 +134,10 @@ public class AnalyticsController implements Initializable {
     private void loadCategoryPieChart() {
         try {
             List<Product> allProducts = productDAO.getAllProducts();
+            
+            if (allProducts.isEmpty()) {
+                return;
+            }
             
             // Group products by category and count
             Map<String, Long> categoryCount = allProducts.stream()
@@ -144,7 +155,8 @@ public class AnalyticsController implements Initializable {
             });
             
             categoryPieChart.setData(pieChartData);
-            categoryPieChart.setTitle("Product Distribution by Category");
+            categoryPieChart.setLabelsVisible(true);
+            categoryPieChart.setLegendVisible(true);
             
         } catch (SQLException e) {
             e.printStackTrace();

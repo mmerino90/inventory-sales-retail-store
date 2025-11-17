@@ -89,10 +89,12 @@ public class AdminDashboardController implements Initializable {
     private void loadView(String fxmlPath) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
-            Stage stage = (Stage) productsButton.getScene().getWindow();
+            Stage stage = (Stage) logoutButton.getScene().getWindow();
             stage.setScene(new Scene(root, 1000, 700));
+            stage.show();
         } catch (Exception e) {
             e.printStackTrace();
+            System.err.println("Error loading view: " + fxmlPath);
         }
     }
 }
