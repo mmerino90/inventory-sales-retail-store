@@ -4,11 +4,23 @@ A JavaFX-based desktop application for managing inventory, sales, and analytics 
 
 ## Features
 
-- **User Authentication**: Secure login system with role-based access
-- **Product Management**: Add, update, delete, and view products
-- **Sales Management**: Process sales transactions and track inventory
-- **Analytics Dashboard**: View sales statistics and revenue reports
-- **Database**: SQLite database for persistent data storage
+### Core Features
+- **User Authentication**: Secure login with SHA-256 password hashing
+- **Role-Based Access Control**: 2 roles (Admin, Employee) with different permissions
+- **Product Management**: Full CRUD operations with real-time search
+- **Sales Management**: Process transactions with date and product filtering
+- **Analytics Dashboard**: Interactive charts (Bar Chart, Pie Chart) with sales insights
+- **Low Stock Alerts**: Visual warnings for products with quantity < 10
+- **Auto Database Initialization**: SQLite database auto-creates from schema on first run
+- **Maximized Window**: All screens open in full-screen mode by default
+
+### Advanced Features
+- **Real-time Search**: Filter products by name, category, or supplier as you type
+- **Sales Filtering**: Filter by date range and product name
+- **Password Migration**: Automatic hashing of plain-text passwords on first login
+- **Smart Inventory**: Automatic stock deduction on sales
+- **Visual Highlights**: Red row highlighting for low stock items
+- **Form Auto-populate**: Click table row to auto-fill edit forms
 
 ## Technologies Used
 
@@ -23,19 +35,40 @@ A JavaFX-based desktop application for managing inventory, sales, and analytics 
 inventory-sales-retail-store/
 ├─ src/main/
 │  ├─ java/com/storeapp/
-│  │  ├─ Main.java              # Application entry point
-│  │  ├─ db/                    # Database connection
-│  │  ├─ model/                 # Data models (User, Product, Sale)
-│  │  ├─ dao/                   # Data access objects
-│  │  ├─ ui/                    # JavaFX controllers
-│  │  └─ util/                  # Utility classes
+│  │  ├─ Main.java                           # Application entry point
+│  │  ├─ dao/                                # Data Access Objects
+│  │  │  ├─ ProductDAO.java                  # Product CRUD operations
+│  │  │  ├─ SaleDAO.java                     # Sales CRUD operations
+│  │  │  └─ UserDAO.java                     # User authentication & management
+│  │  ├─ db/                                 # Database layer
+│  │  │  └─ Database.java                    # SQLite connection & auto-initialization
+│  │  ├─ model/                              # Data models
+│  │  │  ├─ Product.java                     # Product entity
+│  │  │  ├─ Sale.java                        # Sale entity
+│  │  │  └─ User.java                        # User entity
+│  │  ├─ ui/                                 # JavaFX Controllers
+│  │  │  ├─ AdminDashboardController.java    # Main dashboard with role-based visibility
+│  │  │  ├─ AnalyticsController.java         # Charts & statistics (Admin only)
+│  │  │  ├─ LoginController.java             # Authentication screen
+│  │  │  ├─ ProductListController.java       # Product management with search
+│  │  │  ├─ SalesController.java             # Sales transactions with filtering
+│  │  │  └─ UserManagementController.java    # User admin (Admin only)
+│  │  └─ util/                               # Utilities
+│  │     ├─ PasswordUtil.java                # SHA-256 password hashing
+│  │     └─ UserSession.java                 # Session management (Singleton)
 │  └─ resources/
-│     ├─ fxml/                  # JavaFX FXML layouts
-│     └─ application.css        # Stylesheet
+│     ├─ fxml/                               # JavaFX FXML layouts
+│     │  ├─ admin_dashboard.fxml             # Dashboard with dynamic sections
+│     │  ├─ analytics.fxml                   # Analytics with BarChart & PieChart
+│     │  ├─ login.fxml                       # Login screen
+│     │  ├─ product_list.fxml                # Products with search & low stock alerts
+│     │  ├─ sales.fxml                       # Sales with date/product filters
+│     │  └─ users_management.fxml            # User management
+│     └─ application.css                     # Global styles
 ├─ db/
-│  ├─ schema.sql               # Database schema
-│  └─ store.db                 # SQLite database (initialized)
-└─ pom.xml                     # Maven build configuration
+│  ├─ schema.sql                             # Database schema with 2-role system
+│  └─ store.db                               # SQLite database (auto-created)
+└─ pom.xml                                   # Maven dependencies (JavaFX, SQLite JDBC)
 ```
 
 ## Setup Instructions
@@ -68,37 +101,73 @@ inventory-sales-retail-store/
 **Admin:**
 - Username: `admin`
 - Password: `admin123`
+- **Permissions**: Full access to all features (Products, Sales, Analytics, Users)
 
-**Cashier:**
-- Username: `cashier`
-- Password: `cashier123`
-
-**Manager:**
-- Username: `manager`
-- Password: `manager123`
+**Employee:**
+- Username: `employee`
+- Password: `employee123`
+- **Permissions**: Limited access (Products, Sales only)
 
 ## Usage
 
-1. **Login**: Use the default credentials to log in
-2. **Admin Dashboard**: Access product management, sales, and analytics
-3. **Manage Products**: Add, update, or delete products from inventory
-4. **Process Sales**: Select products and quantities to record sales
-5. **View Analytics**: Check sales statistics and revenue reports
+### For Admins
+1. **Login**: Use admin credentials
+2. **Manage Products**: Add/edit/delete products, real-time search, low stock warnings
+3. **Process Sales**: Record transactions, automatic stock updates
+4. **View Analytics**: Sales charts, revenue statistics, product performance
+5. **Manage Users**: Add/edit/delete users with role assignment
+
+### For Employees
+1. **Login**: Use employee credentials
+2. **Manage Products**: Add/edit/delete products, search inventory, check stock levels
+3. **Process Sales**: Record transactions, filter by date/product
+
+### Key Features by Screen
+- **Product Management**: Search bar, auto-populate on row click, Clear Form button
+- **Sales**: Date range picker, product filter, automatic inventory updates
+- **Analytics** (Admin only): Bar chart (units sold), Pie chart (revenue distribution), stat cards
 
 ## Database Schema
 
-- **users**: Stores user authentication and role information
-- **products**: Contains product details and inventory levels
-- **sales**: Records all sales transactions
+### Tables
+- **users**: User authentication and roles
+  - `id` (INTEGER PRIMARY KEY)
+  - `username` (TEXT UNIQUE)
+  - `password` (TEXT) - SHA-256 hashed
+  - `role` (TEXT) - CHECK constraint: 'admin' or 'employee'
 
-## Future Enhancements
+- **products**: Product inventory
+  - `id` (INTEGER PRIMARY KEY)
+  - `name` (TEXT)
+  - `category` (TEXT)
+  - `price` (REAL)
+  - `quantity` (INTEGER)
+  - `supplier` (TEXT)
 
-- User management interface
-- Advanced reporting and charts
-- Barcode scanning support
-- Multi-store support
-- Export data to CSV/PDF
+- **sales**: Transaction records
+  - `id` (INTEGER PRIMARY KEY)
+  - `product_id` (INTEGER) - Foreign key to products
+  - `quantity` (INTEGER)
+  - `total_price` (REAL)
+  - `sale_date` (TEXT)
 
-## License
+### Role System
+- **Admin**: Full access to all 4 modules (Products, Sales, Analytics, Users)
+- **Employee**: Limited access to 2 modules (Products, Sales)
 
-This project is provided as-is for educational and commercial use.
+## Technical Details
+
+### Architecture
+- **Pattern**: MVC (Model-View-Controller)
+- **Database**: SQLite with JDBC
+- **UI Framework**: JavaFX with FXML
+- **Build Tool**: Maven
+- **Java Version**: 21
+
+### Key Components
+- **DAO Pattern**: Separation of data access logic
+- **Singleton Pattern**: UserSession for session management
+- **FilteredList**: Real-time search implementation
+- **TableRow Factory**: Custom row styling for visual alerts
+- **Password Hashing**: SHA-256 with Base64 encoding
+- **Auto-initialization**: Database creates from schema.sql on first run
