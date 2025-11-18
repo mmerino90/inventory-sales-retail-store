@@ -174,6 +174,7 @@ public class AnalyticsController implements Initializable {
             javafx.scene.Parent root = loader.load();
             javafx.stage.Stage stage = (javafx.stage.Stage) backButton.getScene().getWindow();
             stage.setScene(new javafx.scene.Scene(root, 1000, 700));
+            stage.setMaximized(true);
         } catch (Exception e) {
             e.printStackTrace();
         }

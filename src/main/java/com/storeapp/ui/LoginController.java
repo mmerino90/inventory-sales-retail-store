@@ -63,6 +63,7 @@ public class LoginController {
             Stage stage = (Stage) loginButton.getScene().getWindow();
             Scene scene = new Scene(root, 1000, 700);
             stage.setScene(scene);
+            stage.setMaximized(true);
             stage.show();
             System.out.println("Dashboard loaded successfully for user: " + user.getUsername());
         } catch (Exception e) {

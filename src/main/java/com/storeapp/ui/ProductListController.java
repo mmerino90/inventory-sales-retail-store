@@ -53,6 +53,12 @@ public class ProductListController implements Initializable {
     private TextField categoryField;
 
     @FXML
+    private TextField searchField;
+
+    @FXML
+    private Label lowStockWarning;
+
+    @FXML
     private Button addButton;
 
     @FXML
@@ -69,6 +75,7 @@ public class ProductListController implements Initializable {
 
     private ProductDAO productDAO = new ProductDAO();
     private ObservableList<Product> productList = FXCollections.observableArrayList();
+    private ObservableList<Product> filteredList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -86,6 +93,26 @@ public class ProductListController implements Initializable {
             }
         });
 
+        // Real-time search functionality
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterProducts(newValue);
+        });
+
+        // Add row factory for low stock highlighting
+        productTable.setRowFactory(tv -> new TableRow<Product>() {
+            @Override
+            protected void updateItem(Product product, boolean empty) {
+                super.updateItem(product, empty);
+                if (product == null || empty) {
+                    setStyle("");
+                } else if (product.getQuantity() < 10) {
+                    setStyle("-fx-background-color: #FED7D7; -fx-font-weight: bold;");
+                } else {
+                    setStyle("");
+                }
+            }
+        });
+
         loadProducts();
     }
 
@@ -93,9 +120,44 @@ public class ProductListController implements Initializable {
         try {
             productList.clear();
             productList.addAll(productDAO.getAllProducts());
-            productTable.setItems(productList);
+            filteredList.clear();
+            filteredList.addAll(productList);
+            productTable.setItems(filteredList);
+            checkLowStock();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void filterProducts(String searchText) {
+        if (searchText == null || searchText.trim().isEmpty()) {
+            filteredList.clear();
+            filteredList.addAll(productList);
+        } else {
+            String lowerCaseFilter = searchText.toLowerCase().trim();
+            filteredList.clear();
+            filteredList.addAll(
+                productList.stream()
+                    .filter(product -> 
+                        product.getName().toLowerCase().contains(lowerCaseFilter) ||
+                        product.getCategory().toLowerCase().contains(lowerCaseFilter) ||
+                        (product.getSupplier() != null && product.getSupplier().toLowerCase().contains(lowerCaseFilter))
+                    )
+                    .collect(java.util.stream.Collectors.toList())
+            );
+        }
+        productTable.setItems(filteredList);
+    }
+
+    private void checkLowStock() {
+        long lowStockCount = productList.stream()
+            .filter(p -> p.getQuantity() < 10)
+            .count();
+        
+        if (lowStockCount > 0) {
+            lowStockWarning.setText("⚠️" + lowStockCount + " product(s) with low stock!");
+        } else {
+            lowStockWarning.setText("");
         }
     }
 
@@ -204,6 +266,7 @@ public class ProductListController implements Initializable {
             javafx.scene.Parent root = loader.load();
             javafx.stage.Stage stage = (javafx.stage.Stage) backButton.getScene().getWindow();
             stage.setScene(new javafx.scene.Scene(root, 1000, 700));
+            stage.setMaximized(true);
         } catch (Exception e) {
             e.printStackTrace();
         }

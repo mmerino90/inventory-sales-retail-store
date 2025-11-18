@@ -49,6 +49,15 @@ public class SalesController implements Initializable {
     private ComboBox<Product> productComboBox;
 
     @FXML
+    private ComboBox<String> filterProductCombo;
+
+    @FXML
+    private DatePicker fromDatePicker;
+
+    @FXML
+    private DatePicker toDatePicker;
+
+    @FXML
     private TextField quantityField;
 
     @FXML
@@ -60,6 +69,7 @@ public class SalesController implements Initializable {
     private SaleDAO saleDAO = new SaleDAO();
     private ProductDAO productDAO = new ProductDAO();
     private ObservableList<Sale> salesList = FXCollections.observableArrayList();
+    private ObservableList<Sale> filteredSalesList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -108,16 +118,74 @@ public class SalesController implements Initializable {
 
         loadSales();
         loadProducts();
+        initializeFilters();
+    }
+
+    private void initializeFilters() {
+        // Populate filter product combo with all products
+        try {
+            ObservableList<String> productNames = FXCollections.observableArrayList();
+            productNames.add("All Products");
+            for (Product p : productDAO.getAllProducts()) {
+                productNames.add(p.getName());
+            }
+            filterProductCombo.setItems(productNames);
+            filterProductCombo.setValue("All Products");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadSales() {
         try {
             salesList.clear();
             salesList.addAll(saleDAO.getAllSales());
-            salesTable.setItems(salesList);
+            filteredSalesList.clear();
+            filteredSalesList.addAll(salesList);
+            salesTable.setItems(filteredSalesList);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void handleFilter(ActionEvent event) {
+        filteredSalesList.clear();
+        
+        java.time.LocalDate fromDate = fromDatePicker.getValue();
+        java.time.LocalDate toDate = toDatePicker.getValue();
+        String selectedProduct = filterProductCombo.getValue();
+        
+        filteredSalesList.addAll(
+            salesList.stream()
+                .filter(sale -> {
+                    // Filter by date range
+                    if (fromDate != null && sale.getSaleDate().toLocalDate().isBefore(fromDate)) {
+                        return false;
+                    }
+                    if (toDate != null && sale.getSaleDate().toLocalDate().isAfter(toDate)) {
+                        return false;
+                    }
+                    // Filter by product
+                    if (selectedProduct != null && !selectedProduct.equals("All Products") && !sale.getProductName().equals(selectedProduct)) {
+                        return false;
+                    }
+                    return true;
+                })
+                .collect(java.util.stream.Collectors.toList())
+        );
+        
+        salesTable.setItems(filteredSalesList);
+    }
+
+    @FXML
+    public void handleClearFilter(ActionEvent event) {
+        fromDatePicker.setValue(null);
+        toDatePicker.setValue(null);
+        filterProductCombo.setValue("All Products");
+        filteredSalesList.clear();
+        filteredSalesList.addAll(salesList);
+        salesTable.setItems(filteredSalesList);
     }
 
     private void loadProducts() {
@@ -258,6 +326,7 @@ public class SalesController implements Initializable {
             javafx.scene.Parent root = loader.load();
             javafx.stage.Stage stage = (javafx.stage.Stage) backButton.getScene().getWindow();
             stage.setScene(new javafx.scene.Scene(root, 1000, 700));
+            stage.setMaximized(true);
         } catch (Exception e) {
             e.printStackTrace();
         }
