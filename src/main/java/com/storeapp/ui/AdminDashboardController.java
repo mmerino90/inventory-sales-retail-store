@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -34,29 +35,27 @@ public class AdminDashboardController implements Initializable {
     @FXML
     private Button logoutButton;
 
+    @FXML
+    private HBox adminOnlySection;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         UserSession session = UserSession.getInstance();
         
         // Set welcome message
         if (session.getCurrentUser() != null) {
-            welcomeLabel.setText("Welcome, " + session.getCurrentUser().getUsername() + " (" + session.getCurrentUser().getRole() + ")");
+            welcomeLabel.setText("Welcome, " + session.getCurrentUser().getUsername());
         }
         
-        // Hide/show buttons based on role
+        // Hide/show sections based on role
         if (session.isAdmin()) {
             // Admin sees everything
-            productsButton.setVisible(true);
-            salesButton.setVisible(true);
-            analyticsButton.setVisible(true);
-            usersButton.setVisible(true);
+            adminOnlySection.setVisible(true);
+            adminOnlySection.setManaged(true);
         } else {
-            // Employees see only Sales and Analytics (as inventory check)
-            productsButton.setVisible(false);
-            usersButton.setVisible(false);
-            salesButton.setVisible(true);
-            analyticsButton.setVisible(true);
-            analyticsButton.setText("View Inventory");
+            // Employees see Products and Sales only
+            adminOnlySection.setVisible(false);
+            adminOnlySection.setManaged(false);
         }
     }
 
@@ -91,6 +90,7 @@ public class AdminDashboardController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
             Stage stage = (Stage) logoutButton.getScene().getWindow();
             stage.setScene(new Scene(root, 1000, 700));
+            stage.setMaximized(true);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

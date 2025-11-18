@@ -29,36 +29,33 @@
                 <Insets bottom="50.0" left="50.0" right="50.0" top="50.0"/>
             </padding>
             
-            <GridPane hgap="25.0" vgap="25.0" alignment="CENTER">
-                <columnConstraints>
-                    <ColumnConstraints minWidth="250.0"/>
-                    <ColumnConstraints minWidth="250.0"/>
-                </columnConstraints>
-                
-                <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 30px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 3);" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <HBox spacing="25.0" alignment="CENTER">
+                <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 30px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 3);">
                     <Label text="📦" style="-fx-font-size: 40px;"/>
                     <Button fx:id="productsButton" text="Manage Products" onAction="#handleProducts" minWidth="200.0" style="-fx-min-height: 45px;"/>
                     <Label text="Inventory &amp; Stock" style="-fx-text-fill: #718096; -fx-font-size: 12px;"/>
                 </VBox>
                 
-                <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 30px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 3);" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 30px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 3);">
                     <Label text="💰" style="-fx-font-size: 40px;"/>
                     <Button fx:id="salesButton" text="Manage Sales" onAction="#handleSales" minWidth="200.0" style="-fx-min-height: 45px;"/>
                     <Label text="Transactions &amp; Orders" style="-fx-text-fill: #718096; -fx-font-size: 12px;"/>
                 </VBox>
-                
-                <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 30px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 3);" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            </HBox>
+            
+            <HBox fx:id="adminOnlySection" spacing="25.0" alignment="CENTER" managed="false" visible="false">
+                <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 30px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 3);">
                     <Label text="📊" style="-fx-font-size: 40px;"/>
                     <Button fx:id="analyticsButton" text="View Analytics" onAction="#handleAnalytics" minWidth="200.0" style="-fx-min-height: 45px;"/>
                     <Label text="Reports &amp; Insights" style="-fx-text-fill: #718096; -fx-font-size: 12px;"/>
                 </VBox>
                 
-                <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 30px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 3);" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 30px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 3);">
                     <Label text="👥" style="-fx-font-size: 40px;"/>
                     <Button fx:id="usersButton" text="Manage Users" onAction="#handleUsers" minWidth="200.0" style="-fx-min-height: 45px;"/>
                     <Label text="Staff &amp; Permissions" style="-fx-text-fill: #718096; -fx-font-size: 12px;"/>
                 </VBox>
-            </GridPane>
+            </HBox>
             
             <Button fx:id="logoutButton" text="🚪 Logout" onAction="#handleLogout" minWidth="250.0" style="-fx-min-height: 45px; -fx-background-color: #e53e3e; -fx-background-radius: 10px;">
                 <VBox.margin>
