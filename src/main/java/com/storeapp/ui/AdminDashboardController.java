@@ -89,7 +89,7 @@ public class AdminDashboardController implements Initializable {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
             Stage stage = (Stage) logoutButton.getScene().getWindow();
-            stage.setScene(new Scene(root, 1000, 700));
+            stage.setScene(new Scene(root, 1200, 800));
             stage.setMaximized(true);
             stage.show();
         } catch (Exception e) {

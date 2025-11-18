@@ -61,7 +61,7 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin_dashboard.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) loginButton.getScene().getWindow();
-            Scene scene = new Scene(root, 1000, 700);
+            Scene scene = new Scene(root, 1200, 800);
             stage.setScene(scene);
             stage.setMaximized(true);
             stage.show();

@@ -203,7 +203,7 @@ public class UserManagementController implements Initializable {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/admin_dashboard.fxml"));
             Stage stage = (Stage) backButton.getScene().getWindow();
-            stage.setScene(new Scene(root, 1000, 700));
+            stage.setScene(new Scene(root, 1200, 800));
             stage.setMaximized(true);
         } catch (Exception e) {
             e.printStackTrace();

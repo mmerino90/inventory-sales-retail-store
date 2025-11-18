@@ -325,7 +325,7 @@ public class SalesController implements Initializable {
             javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource(fxmlPath));
             javafx.scene.Parent root = loader.load();
             javafx.stage.Stage stage = (javafx.stage.Stage) backButton.getScene().getWindow();
-            stage.setScene(new javafx.scene.Scene(root, 1000, 700));
+            stage.setScene(new javafx.scene.Scene(root, 1200, 800));
             stage.setMaximized(true);
         } catch (Exception e) {
             e.printStackTrace();
