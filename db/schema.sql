@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL,
-    role TEXT NOT NULL CHECK(role IN ('admin', 'cashier', 'manager'))
+    role TEXT NOT NULL CHECK(role IN ('admin', 'employee'))
 );
 
 -- Create Products table
@@ -33,12 +33,10 @@ CREATE TABLE IF NOT EXISTS sales (
 
 -- Insert default users
 -- Admin: username=admin, password=admin123
--- Cashier: username=cashier, password=cashier123
--- Manager: username=manager, password=manager123
+-- Employee: username=employee, password=employee123
 INSERT INTO users (username, password, role) VALUES 
 ('admin', 'admin123', 'admin'),
-('cashier', 'cashier123', 'cashier'),
-('manager', 'manager123', 'manager');
+('employee', 'employee123', 'employee');
 
 -- Insert sample products
 INSERT INTO products (name, description, cost_price, selling_price, quantity, category, supplier, expiry_date) VALUES 
