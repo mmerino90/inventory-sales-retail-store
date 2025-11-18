@@ -23,6 +23,12 @@
                 <Insets bottom="20.0" left="30.0" right="30.0" top="20.0"/>
             </padding>
             
+            <HBox spacing="15.0" alignment="CENTER_LEFT">
+                <Label text="🔍 Search:" style="-fx-font-size: 14px; -fx-font-weight: 600; -fx-text-fill: #2d3748;"/>
+                <TextField fx:id="searchField" promptText="Search by name, category, or supplier..." HBox.hgrow="ALWAYS" style="-fx-min-width: 400px; -fx-pref-height: 35px;"/>
+                <Label fx:id="lowStockWarning" text="" style="-fx-text-fill: #e53e3e; -fx-font-weight: bold; -fx-font-size: 14px;"/>
+            </HBox>
+            
             <TableView fx:id="productTable" style="-fx-background-radius: 12px;">
                 <columnResizePolicy>
                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
