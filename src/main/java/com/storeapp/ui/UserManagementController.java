@@ -66,7 +66,7 @@ public class UserManagementController implements Initializable {
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
 
         // Setup role combo box
-        roleComboBox.setItems(FXCollections.observableArrayList("admin", "cashier", "manager"));
+        roleComboBox.setItems(FXCollections.observableArrayList("admin", "employee"));
 
         // Add action buttons (Edit and Delete)
         actionsColumn.setCellFactory(param -> new TableCell<User, Void>() {
@@ -204,6 +204,7 @@ public class UserManagementController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/admin_dashboard.fxml"));
             Stage stage = (Stage) backButton.getScene().getWindow();
             stage.setScene(new Scene(root, 1000, 700));
+            stage.setMaximized(true);
         } catch (Exception e) {
             e.printStackTrace();
         }
