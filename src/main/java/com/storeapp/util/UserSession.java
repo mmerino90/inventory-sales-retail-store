@@ -28,7 +28,7 @@ public class UserSession {
     }
 
     public boolean isEmployee() {
-        return currentUser != null && ("cashier".equals(currentUser.getRole()) || "manager".equals(currentUser.getRole()));
+        return currentUser != null && "employee".equals(currentUser.getRole());
     }
 
     public void clearSession() {
