@@ -11,8 +11,8 @@
                 <padding>
                     <Insets bottom="20.0" left="30.0" right="30.0" top="20.0"/>
                 </padding>
-                <Button fx:id="backButton" text="← Back" onAction="#handleBack" style="-fx-background-color: rgba(255,255,255,0.95); -fx-text-fill: #667eea; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 10px 20px;"/>
-                <Label text="👥 User Management" style="-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                <Button fx:id="backButton" text="[ BACK ]" onAction="#handleBack" style="-fx-background-color: rgba(255,255,255,0.95); -fx-text-fill: #667eea; -fx-font-weight: bold; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-background-radius: 8px; -fx-padding: 10px 20px;"/>
+                <Label text="[ USER MANAGEMENT ]" style="-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
             </HBox>
         </VBox>
     </top>
@@ -42,7 +42,7 @@
                 <Insets bottom="15.0" left="30.0" right="30.0" top="15.0"/>
             </padding>
             
-            <Label text="User Details" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2d3748;"/>
+            <Label text="[ USER DETAILS ]" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2d3748; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
             
             <GridPane hgap="20.0" vgap="15.0">
                 <columnConstraints>
@@ -53,24 +53,24 @@
                 </columnConstraints>
                 
                 <VBox spacing="8.0" GridPane.columnIndex="0">
-                    <Label text="Username" style="-fx-font-weight: 600;"/>
-                    <TextField fx:id="usernameField" promptText="Enter username" style="-fx-min-height: 42px;"/>
+                    <Label text="USERNAME" style="-fx-font-weight: 700; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 13px;"/>
+                    <TextField fx:id="usernameField" promptText="ENTER USERNAME" style="-fx-min-height: 45px;"/>
                 </VBox>
                 
                 <VBox spacing="8.0" GridPane.columnIndex="1">
-                    <Label text="Password" style="-fx-font-weight: 600;"/>
-                    <PasswordField fx:id="passwordField" promptText="Enter password" style="-fx-min-height: 42px;"/>
+                    <Label text="PASSWORD" style="-fx-font-weight: 700; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 13px;"/>
+                    <PasswordField fx:id="passwordField" promptText="ENTER PASSWORD" style="-fx-min-height: 45px;"/>
                 </VBox>
                 
                 <VBox spacing="8.0" GridPane.columnIndex="2">
-                    <Label text="Role" style="-fx-font-weight: 600;"/>
-                    <ComboBox fx:id="roleComboBox" prefWidth="200.0" style="-fx-min-height: 42px;"/>
+                    <Label text="ROLE" style="-fx-font-weight: 700; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 13px;"/>
+                    <ComboBox fx:id="roleComboBox" prefWidth="200.0" style="-fx-min-height: 45px;"/>
                 </VBox>
                 
                 <VBox spacing="8.0" GridPane.columnIndex="3" alignment="BOTTOM_CENTER">
                     <HBox spacing="10.0" alignment="CENTER">
-                        <Button fx:id="addUserButton" text="➕ Add User" onAction="#handleAddUser" style="-fx-min-width: 110px; -fx-min-height: 42px; -fx-background-color: #48bb78;"/>
-                        <Button fx:id="clearButton" text="🔄 Clear" onAction="#handleClear" style="-fx-min-width: 90px; -fx-min-height: 42px; -fx-background-color: #718096;"/>
+                        <Button fx:id="addUserButton" text="[ ADD USER ]" onAction="#handleAddUser" style="-fx-min-width: 120px; -fx-min-height: 45px; -fx-background-color: #48bb78;"/>
+                        <Button fx:id="clearButton" text="[ CLEAR ]" onAction="#handleClear" style="-fx-min-width: 100px; -fx-min-height: 45px; -fx-background-color: #718096;"/>
                     </HBox>
                 </VBox>
             </GridPane>

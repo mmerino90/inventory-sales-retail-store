@@ -11,8 +11,8 @@
                 <padding>
                     <Insets bottom="20.0" left="30.0" right="30.0" top="20.0"/>
                 </padding>
-                <Button fx:id="backButton" text="← Back" onAction="#handleBack" style="-fx-background-color: rgba(255,255,255,0.95); -fx-text-fill: #667eea; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 10px 20px;"/>
-                <Label text="📦 Product Management" style="-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                <Button fx:id="backButton" text="[ BACK ]" onAction="#handleBack" style="-fx-background-color: rgba(255,255,255,0.95); -fx-text-fill: #667eea; -fx-font-weight: bold; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-background-radius: 8px; -fx-padding: 10px 20px;"/>
+                <Label text="[ PRODUCT MANAGEMENT ]" style="-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
             </HBox>
         </VBox>
     </top>
@@ -24,9 +24,9 @@
             </padding>
             
             <HBox spacing="15.0" alignment="CENTER_LEFT">
-                <Label text="🔍 Search:" style="-fx-font-size: 14px; -fx-font-weight: 600; -fx-text-fill: #2d3748;"/>
-                <TextField fx:id="searchField" promptText="Search by name, category, or supplier..." HBox.hgrow="ALWAYS" style="-fx-min-width: 400px; -fx-pref-height: 35px;"/>
-                <Label fx:id="lowStockWarning" text="" style="-fx-text-fill: #e53e3e; -fx-font-weight: bold; -fx-font-size: 14px;"/>
+                <Label text="SEARCH:" style="-fx-font-size: 14px; -fx-font-weight: 700; -fx-text-fill: #2d3748; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
+                <TextField fx:id="searchField" promptText="SEARCH BY NAME, CATEGORY, OR SUPPLIER..." HBox.hgrow="ALWAYS" style="-fx-min-width: 400px; -fx-pref-height: 40px;"/>
+                <Label fx:id="lowStockWarning" text="" style="-fx-text-fill: #e53e3e; -fx-font-weight: bold; -fx-font-size: 14px; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
             </HBox>
             
             <TableView fx:id="productTable" style="-fx-background-radius: 12px;">
@@ -51,7 +51,7 @@
                 <Insets bottom="15.0" left="30.0" right="30.0" top="15.0"/>
             </padding>
             
-            <Label text="Product Details" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2d3748;"/>
+            <Label text="[ PRODUCT DETAILS ]" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2d3748; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
             
             <GridPane hgap="15.0" vgap="15.0">
                 <columnConstraints>
@@ -61,30 +61,30 @@
                     <ColumnConstraints percentWidth="30.0"/>
                 </columnConstraints>
                 
-                <Label text="Product Name" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: 600;"/>
-                <TextField fx:id="nameField" promptText="Enter product name" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Label text="PRODUCT NAME" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: 700; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 13px;"/>
+                <TextField fx:id="nameField" promptText="ENTER PRODUCT NAME" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
                 
-                <Label text="Price" GridPane.columnIndex="2" GridPane.rowIndex="0" style="-fx-font-weight: 600;"/>
+                <Label text="PRICE" GridPane.columnIndex="2" GridPane.rowIndex="0" style="-fx-font-weight: 700; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 13px;"/>
                 <TextField fx:id="priceField" promptText="0.00" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
                 
-                <Label text="Description" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: 600;"/>
-                <TextField fx:id="descriptionField" promptText="Enter description" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Label text="DESCRIPTION" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: 700; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 13px;"/>
+                <TextField fx:id="descriptionField" promptText="ENTER DESCRIPTION" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                 
-                <Label text="Stock Quantity" GridPane.columnIndex="2" GridPane.rowIndex="1" style="-fx-font-weight: 600;"/>
+                <Label text="STOCK QUANTITY" GridPane.columnIndex="2" GridPane.rowIndex="1" style="-fx-font-weight: 700; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 13px;"/>
                 <TextField fx:id="quantityField" promptText="0" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
                 
-                <Label text="Category" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: 600;"/>
-                <TextField fx:id="categoryField" promptText="e.g., Electronics" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                <Label text="CATEGORY" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: 700; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 13px;"/>
+                <TextField fx:id="categoryField" promptText="E.G., ELECTRONICS" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
             </GridPane>
             
             <HBox spacing="15.0" alignment="CENTER">
                 <padding>
                     <Insets top="10.0"/>
                 </padding>
-                <Button fx:id="addButton" text="➕ Add Product" onAction="#handleAdd" style="-fx-min-width: 150px; -fx-min-height: 40px; -fx-background-color: #48bb78;"/>
-                <Button fx:id="updateButton" text="✏️ Update Selected" onAction="#handleUpdate" style="-fx-min-width: 150px; -fx-min-height: 40px; -fx-background-color: #4299e1;"/>
-                <Button fx:id="deleteButton" text="🗑️ Delete Selected" onAction="#handleDelete" style="-fx-min-width: 150px; -fx-min-height: 40px; -fx-background-color: #f56565;"/>
-                <Button fx:id="clearButton" text="🔄 Clear Form" onAction="#handleClear" style="-fx-min-width: 150px; -fx-min-height: 40px; -fx-background-color: #718096;"/>
+                <Button fx:id="addButton" text="[ ADD PRODUCT ]" onAction="#handleAdd" style="-fx-min-width: 160px; -fx-min-height: 45px; -fx-background-color: #48bb78;"/>
+                <Button fx:id="updateButton" text="[ UPDATE ]" onAction="#handleUpdate" style="-fx-min-width: 160px; -fx-min-height: 45px; -fx-background-color: #4299e1;"/>
+                <Button fx:id="deleteButton" text="[ DELETE ]" onAction="#handleDelete" style="-fx-min-width: 160px; -fx-min-height: 45px; -fx-background-color: #f56565;"/>
+                <Button fx:id="clearButton" text="[ CLEAR FORM ]" onAction="#handleClear" style="-fx-min-width: 160px; -fx-min-height: 45px; -fx-background-color: #718096;"/>
             </HBox>
         </VBox>
     </bottom>

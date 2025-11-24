@@ -12,8 +12,8 @@
                 <padding>
                     <Insets bottom="20.0" left="30.0" right="30.0" top="20.0"/>
                 </padding>
-                <Button fx:id="backButton" text="← Back" onAction="#handleBack" style="-fx-background-color: rgba(255,255,255,0.95); -fx-text-fill: #667eea; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 10px 20px;"/>
-                <Label text="📊 Analytics Dashboard" style="-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                <Button fx:id="backButton" text="[ BACK ]" onAction="#handleBack" style="-fx-background-color: rgba(255,255,255,0.95); -fx-text-fill: #667eea; -fx-font-weight: bold; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-background-radius: 8px; -fx-padding: 10px 20px;"/>
+                <Label text="[ ANALYTICS DASHBOARD ]" style="-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
             </HBox>
         </VBox>
     </top>
@@ -35,27 +35,27 @@
                     </columnConstraints>
                     
                     <VBox alignment="CENTER" spacing="12.0" style="-fx-background-color: #667eea; -fx-background-radius: 15px; -fx-padding: 25px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 12, 0, 0, 3);" GridPane.columnIndex="0">
-                        <Label text="Total Sales" style="-fx-font-size: 14px; -fx-font-weight: 700; -fx-text-fill: white;"/>
-                        <Label fx:id="totalSalesLabel" text="0" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;"/>
-                        <Label text="All time" style="-fx-font-size: 12px; -fx-text-fill: #E8E8F0;"/>
+                        <Label text="TOTAL SALES" style="-fx-font-size: 14px; -fx-font-weight: 700; -fx-text-fill: white; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
+                        <Label fx:id="totalSalesLabel" text="0" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
+                        <Label text="ALL TIME" style="-fx-font-size: 12px; -fx-text-fill: #E8E8F0; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
                     </VBox>
                     
                     <VBox alignment="CENTER" spacing="12.0" style="-fx-background-color: #e53e3e; -fx-background-radius: 15px; -fx-padding: 25px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 12, 0, 0, 3);" GridPane.columnIndex="1">
-                        <Label text="Total Revenue" style="-fx-font-size: 14px; -fx-font-weight: 700; -fx-text-fill: white;"/>
-                        <Label fx:id="totalRevenueLabel" text="0.00" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;"/>
-                        <Label text="All time" style="-fx-font-size: 12px; -fx-text-fill: #FFE8E8;"/>
+                        <Label text="TOTAL REVENUE" style="-fx-font-size: 14px; -fx-font-weight: 700; -fx-text-fill: white; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
+                        <Label fx:id="totalRevenueLabel" text="0.00" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
+                        <Label text="ALL TIME" style="-fx-font-size: 12px; -fx-text-fill: #FFE8E8; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
                     </VBox>
                     
                     <VBox alignment="CENTER" spacing="12.0" style="-fx-background-color: #3182ce; -fx-background-radius: 15px; -fx-padding: 25px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 12, 0, 0, 3);" GridPane.columnIndex="2">
-                        <Label text="Todays Sales" style="-fx-font-size: 14px; -fx-font-weight: 700; -fx-text-fill: white;"/>
-                        <Label fx:id="todaySalesLabel" text="0" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;"/>
-                        <Label text="Last 24 hours" style="-fx-font-size: 12px; -fx-text-fill: #E0F2FE;"/>
+                        <Label text="TODAY'S SALES" style="-fx-font-size: 14px; -fx-font-weight: 700; -fx-text-fill: white; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
+                        <Label fx:id="todaySalesLabel" text="0" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
+                        <Label text="LAST 24 HOURS" style="-fx-font-size: 12px; -fx-text-fill: #E0F2FE; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
                     </VBox>
                     
                     <VBox alignment="CENTER" spacing="12.0" style="-fx-background-color: #38a169; -fx-background-radius: 15px; -fx-padding: 25px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 12, 0, 0, 3);" GridPane.columnIndex="3">
-                        <Label text="Todays Revenue" style="-fx-font-size: 14px; -fx-font-weight: 700; -fx-text-fill: white;"/>
-                        <Label fx:id="todayRevenueLabel" text="0.00" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;"/>
-                        <Label text="Last 24 hours" style="-fx-font-size: 12px; -fx-text-fill: #E6FFED;"/>
+                        <Label text="TODAY'S REVENUE" style="-fx-font-size: 14px; -fx-font-weight: 700; -fx-text-fill: white; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
+                        <Label fx:id="todayRevenueLabel" text="0.00" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
+                        <Label text="LAST 24 HOURS" style="-fx-font-size: 12px; -fx-text-fill: #E6FFED; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
                     </VBox>
                 </GridPane>
                 
@@ -63,7 +63,7 @@
                 <HBox spacing="25.0" alignment="CENTER">
                     <!-- Bar Chart: Units Sold by Product -->
                     <VBox spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 25px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 12, 0, 0, 3);">
-                        <Label text="📊 Top Products by Units Sold" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2d3748;"/>
+                        <Label text="[ TOP PRODUCTS BY UNITS SOLD ]" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2d3748; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
                         <BarChart fx:id="unitsBarChart" prefWidth="500.0" prefHeight="350.0" legendVisible="false" animated="true" barGap="3" categoryGap="15">
                             <xAxis>
                                 <CategoryAxis label="Product Name" side="BOTTOM" fx:id="xAxis" tickLabelRotation="45" tickLabelFill="#2d3748"/>
@@ -76,7 +76,7 @@
                     
                     <!-- Pie Chart: Products by Category -->
                     <VBox spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 25px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 12, 0, 0, 3);">
-                        <Label text="🎯 Product Distribution by Category" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2d3748;"/>
+                        <Label text="[ PRODUCT DISTRIBUTION BY CATEGORY ]" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2d3748; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
                         <PieChart fx:id="categoryPieChart" prefWidth="550.0" prefHeight="400.0" legendVisible="true" legendSide="RIGHT" animated="true" labelsVisible="true"/>
                     </VBox>
                 </HBox>

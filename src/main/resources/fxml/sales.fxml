@@ -11,8 +11,8 @@
                 <padding>
                     <Insets bottom="20.0" left="30.0" right="30.0" top="20.0"/>
                 </padding>
-                <Button fx:id="backButton" text="← Back" onAction="#handleBack" style="-fx-background-color: rgba(255,255,255,0.95); -fx-text-fill: #667eea; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 10px 20px;"/>
-                <Label text="💰 Sales Management" style="-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                <Button fx:id="backButton" text="[ BACK ]" onAction="#handleBack" style="-fx-background-color: rgba(255,255,255,0.95); -fx-text-fill: #667eea; -fx-font-weight: bold; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-background-radius: 8px; -fx-padding: 10px 20px;"/>
+                <Label text="[ SALES MANAGEMENT ]" style="-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
             </HBox>
         </VBox>
     </top>
@@ -24,16 +24,16 @@
             </padding>
             
             <VBox spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-padding: 15px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2);">
-                <Label text="🔍 Filter Sales" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2d3748;"/>
+                <Label text="[ FILTER SALES ]" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2d3748; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
                 <HBox spacing="15.0" alignment="CENTER_LEFT">
-                    <Label text="From:" style="-fx-font-weight: 600;"/>
-                    <DatePicker fx:id="fromDatePicker" promptText="Start Date" prefWidth="150.0"/>
-                    <Label text="To:" style="-fx-font-weight: 600;"/>
-                    <DatePicker fx:id="toDatePicker" promptText="End Date" prefWidth="150.0"/>
-                    <Label text="Product:" style="-fx-font-weight: 600;"/>
-                    <ComboBox fx:id="filterProductCombo" promptText="All Products" prefWidth="180.0"/>
-                    <Button text="Apply Filter" onAction="#handleFilter" style="-fx-background-color: #3182ce; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8px 15px;"/>
-                    <Button text="Clear" onAction="#handleClearFilter" style="-fx-background-color: #718096; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8px 15px;"/>
+                    <Label text="FROM:" style="-fx-font-weight: 700; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 13px;"/>
+                    <DatePicker fx:id="fromDatePicker" promptText="START DATE" prefWidth="150.0"/>
+                    <Label text="TO:" style="-fx-font-weight: 700; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 13px;"/>
+                    <DatePicker fx:id="toDatePicker" promptText="END DATE" prefWidth="150.0"/>
+                    <Label text="PRODUCT:" style="-fx-font-weight: 700; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 13px;"/>
+                    <ComboBox fx:id="filterProductCombo" promptText="ALL PRODUCTS" prefWidth="180.0"/>
+                    <Button text="[ APPLY ]" onAction="#handleFilter" style="-fx-background-color: #3182ce; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10px 18px;"/>
+                    <Button text="[ CLEAR ]" onAction="#handleClearFilter" style="-fx-background-color: #718096; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10px 18px;"/>
                 </HBox>
             </VBox>
             
@@ -60,22 +60,22 @@
                 <Insets bottom="15.0" left="30.0" right="30.0" top="15.0"/>
             </padding>
             
-            <Label text="Create New Sale" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2d3748;"/>
+            <Label text="[ CREATE NEW SALE ]" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2d3748; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
             
             <HBox spacing="20.0" alignment="CENTER_LEFT">
                 <VBox spacing="8.0">
-                    <Label text="Select Product" style="-fx-font-weight: 600;"/>
-                    <ComboBox fx:id="productComboBox" prefWidth="280.0" style="-fx-min-height: 42px;"/>
+                    <Label text="SELECT PRODUCT" style="-fx-font-weight: 700; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 13px;"/>
+                    <ComboBox fx:id="productComboBox" prefWidth="300.0" style="-fx-min-height: 45px;"/>
                 </VBox>
                 
                 <VBox spacing="8.0">
-                    <Label text="Quantity" style="-fx-font-weight: 600;"/>
-                    <TextField fx:id="quantityField" promptText="Enter quantity" prefWidth="150.0" style="-fx-min-height: 42px;"/>
+                    <Label text="QUANTITY" style="-fx-font-weight: 700; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 13px;"/>
+                    <TextField fx:id="quantityField" promptText="ENTER QUANTITY" prefWidth="160.0" style="-fx-min-height: 45px;"/>
                 </VBox>
                 
                 <VBox spacing="8.0">
                     <Label text=" " style="-fx-font-weight: 600;"/>
-                    <Button fx:id="addSaleButton" text="💳 Process Sale" onAction="#handleAddSale" style="-fx-min-width: 180px; -fx-min-height: 42px; -fx-background-color: #48bb78; -fx-font-size: 15px;"/>
+                    <Button fx:id="addSaleButton" text="[ PROCESS SALE ]" onAction="#handleAddSale" style="-fx-min-width: 190px; -fx-min-height: 45px; -fx-background-color: #48bb78; -fx-font-size: 15px;"/>
                 </VBox>
             </HBox>
         </VBox>

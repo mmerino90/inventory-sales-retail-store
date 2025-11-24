@@ -13,35 +13,35 @@
     <!-- Login Card -->
     <VBox alignment="CENTER" spacing="25.0" style="-fx-background-color: white; -fx-background-radius: 20px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 20, 0, 0, 5); -fx-padding: 50px;">
         
-        <Label text="🏪 Retail Store" styleClass="title">
+        <Label text="RETAIL STORE" styleClass="title">
             <font>
-                <Font name="Segoe UI Bold" size="32.0"/>
+                <Font name="Consolas" size="36.0"/>
             </font>
         </Label>
         
-        <Label text="Management System" style="-fx-font-size: 20px; -fx-text-fill: #718096; -fx-font-weight: 600;">
+        <Label text="MANAGEMENT SYSTEM" style="-fx-font-size: 22px; -fx-text-fill: #374151; -fx-font-weight: 600; -fx-font-family: 'Consolas', 'Courier New', monospace;">
             <padding>
                 <Insets bottom="10.0"/>
             </padding>
         </Label>
         
-        <Label text="Welcome back! Please login to continue" style="-fx-font-size: 14px; -fx-text-fill: #a0aec0;">
+        <Label text="AUTHENTICATE TO ACCESS SYSTEM" style="-fx-font-size: 14px; -fx-text-fill: #6b7280; -fx-font-family: 'Consolas', 'Courier New', monospace;">
             <padding>
                 <Insets bottom="20.0"/>
             </padding>
         </Label>
         
-        <VBox spacing="15.0" maxWidth="350.0" minWidth="350.0">
-            <Label text="Username" style="-fx-font-weight: 600; -fx-text-fill: #4a5568;"/>
-            <TextField fx:id="usernameField" promptText="Enter your username" style="-fx-min-height: 45px;"/>
+        <VBox spacing="15.0" maxWidth="400.0" minWidth="400.0">
+            <Label text="USERNAME" style="-fx-font-weight: 700; -fx-text-fill: #1f2937; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 13px;"/>
+            <TextField fx:id="usernameField" promptText="ENTER USERNAME" style="-fx-min-height: 50px; -fx-font-size: 15px;"/>
         </VBox>
         
-        <VBox spacing="15.0" maxWidth="350.0" minWidth="350.0">
-            <Label text="Password" style="-fx-font-weight: 600; -fx-text-fill: #4a5568;"/>
-            <PasswordField fx:id="passwordField" promptText="Enter your password" style="-fx-min-height: 45px;"/>
+        <VBox spacing="15.0" maxWidth="400.0" minWidth="400.0">
+            <Label text="PASSWORD" style="-fx-font-weight: 700; -fx-text-fill: #1f2937; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 13px;"/>
+            <PasswordField fx:id="passwordField" promptText="ENTER PASSWORD" style="-fx-min-height: 50px; -fx-font-size: 15px;"/>
         </VBox>
         
-        <Button fx:id="loginButton" text="LOGIN" onAction="#handleLogin" maxWidth="350.0" minWidth="350.0" style="-fx-min-height: 48px; -fx-font-size: 15px;">
+        <Button fx:id="loginButton" text="[ LOGIN ]" onAction="#handleLogin" maxWidth="400.0" minWidth="400.0" style="-fx-min-height: 52px; -fx-font-size: 16px; -fx-font-weight: bold;">
             <VBox.margin>
                 <Insets top="15.0"/>
             </VBox.margin>

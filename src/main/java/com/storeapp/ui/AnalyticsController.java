@@ -173,7 +173,15 @@ public class AnalyticsController implements Initializable {
             javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource(fxmlPath));
             javafx.scene.Parent root = loader.load();
             javafx.stage.Stage stage = (javafx.stage.Stage) backButton.getScene().getWindow();
-            stage.setScene(new javafx.scene.Scene(root, 1200, 800));
+            
+            // Get screen bounds for full-screen experience
+            javafx.stage.Screen screen = javafx.stage.Screen.getPrimary();
+            javafx.geometry.Rectangle2D bounds = screen.getVisualBounds();
+            
+            javafx.scene.Scene scene = new javafx.scene.Scene(root, bounds.getWidth(), bounds.getHeight());
+            scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
+            
+            stage.setScene(scene);
             stage.setMaximized(true);
         } catch (Exception e) {
             e.printStackTrace();

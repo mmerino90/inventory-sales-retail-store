@@ -61,7 +61,14 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin_dashboard.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) loginButton.getScene().getWindow();
-            Scene scene = new Scene(root, 1200, 800);
+            
+            // Get screen bounds for full-screen experience
+            javafx.stage.Screen screen = javafx.stage.Screen.getPrimary();
+            javafx.geometry.Rectangle2D bounds = screen.getVisualBounds();
+            
+            Scene scene = new Scene(root, bounds.getWidth(), bounds.getHeight());
+            scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
+            
             stage.setScene(scene);
             stage.setMaximized(true);
             stage.show();

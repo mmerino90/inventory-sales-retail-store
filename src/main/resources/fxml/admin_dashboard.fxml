@@ -12,13 +12,13 @@
                 <padding>
                     <Insets bottom="20.0" left="30.0" right="30.0" top="20.0"/>
                 </padding>
-                <Label text="🏪 Admin Dashboard" textFill="WHITE" styleClass="title">
+                <Label text="[ ADMIN DASHBOARD ]" textFill="WHITE" styleClass="title">
                     <font>
-                        <Font name="Segoe UI Bold" size="26.0"/>
+                        <Font name="Consolas" size="28.0"/>
                     </font>
                 </Label>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="welcomeLabel" text="Welcome" textFill="WHITE" style="-fx-font-size: 15px; -fx-font-weight: 600;"/>
+                <Label fx:id="welcomeLabel" text="WELCOME" textFill="WHITE" style="-fx-font-size: 16px; -fx-font-weight: 700; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
             </HBox>
         </VBox>
     </top>
@@ -29,35 +29,35 @@
                 <Insets bottom="50.0" left="50.0" right="50.0" top="50.0"/>
             </padding>
             
-            <HBox spacing="25.0" alignment="CENTER">
-                <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 30px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 3);">
-                    <Label text="📦" style="-fx-font-size: 40px;"/>
-                    <Button fx:id="productsButton" text="Manage Products" onAction="#handleProducts" minWidth="200.0" style="-fx-min-height: 45px;"/>
-                    <Label text="Inventory &amp; Stock" style="-fx-text-fill: #718096; -fx-font-size: 12px;"/>
+            <HBox spacing="30.0" alignment="CENTER">
+                <VBox alignment="CENTER" spacing="12.0" style="-fx-background-color: white; -fx-background-radius: 12px; -fx-padding: 40px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 18, 0, 0, 4); -fx-border-color: #d1d5db; -fx-border-width: 2px; -fx-border-radius: 12px;">
+                    <Label text="[ PRODUCTS ]" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-text-fill: #1f2937;"/>
+                    <Button fx:id="productsButton" text="MANAGE PRODUCTS" onAction="#handleProducts" minWidth="240.0" style="-fx-min-height: 50px;"/>
+                    <Label text="INVENTORY &amp; STOCK" style="-fx-text-fill: #6b7280; -fx-font-size: 11px; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
                 </VBox>
                 
-                <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 30px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 3);">
-                    <Label text="💰" style="-fx-font-size: 40px;"/>
-                    <Button fx:id="salesButton" text="Manage Sales" onAction="#handleSales" minWidth="200.0" style="-fx-min-height: 45px;"/>
-                    <Label text="Transactions &amp; Orders" style="-fx-text-fill: #718096; -fx-font-size: 12px;"/>
+                <VBox alignment="CENTER" spacing="12.0" style="-fx-background-color: white; -fx-background-radius: 12px; -fx-padding: 40px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 18, 0, 0, 4); -fx-border-color: #d1d5db; -fx-border-width: 2px; -fx-border-radius: 12px;">
+                    <Label text="[ SALES ]" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-text-fill: #1f2937;"/>
+                    <Button fx:id="salesButton" text="MANAGE SALES" onAction="#handleSales" minWidth="240.0" style="-fx-min-height: 50px;"/>
+                    <Label text="TRANSACTIONS &amp; ORDERS" style="-fx-text-fill: #6b7280; -fx-font-size: 11px; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
                 </VBox>
             </HBox>
             
-            <HBox fx:id="adminOnlySection" spacing="25.0" alignment="CENTER" managed="false" visible="false">
-                <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 30px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 3);">
-                    <Label text="📊" style="-fx-font-size: 40px;"/>
-                    <Button fx:id="analyticsButton" text="View Analytics" onAction="#handleAnalytics" minWidth="200.0" style="-fx-min-height: 45px;"/>
-                    <Label text="Reports &amp; Insights" style="-fx-text-fill: #718096; -fx-font-size: 12px;"/>
+            <HBox fx:id="adminOnlySection" spacing="30.0" alignment="CENTER" managed="false" visible="false">
+                <VBox alignment="CENTER" spacing="12.0" style="-fx-background-color: white; -fx-background-radius: 12px; -fx-padding: 40px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 18, 0, 0, 4); -fx-border-color: #d1d5db; -fx-border-width: 2px; -fx-border-radius: 12px;">
+                    <Label text="[ ANALYTICS ]" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-text-fill: #1f2937;"/>
+                    <Button fx:id="analyticsButton" text="VIEW ANALYTICS" onAction="#handleAnalytics" minWidth="240.0" style="-fx-min-height: 50px;"/>
+                    <Label text="REPORTS &amp; INSIGHTS" style="-fx-text-fill: #6b7280; -fx-font-size: 11px; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
                 </VBox>
                 
-                <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 30px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 3);">
-                    <Label text="👥" style="-fx-font-size: 40px;"/>
-                    <Button fx:id="usersButton" text="Manage Users" onAction="#handleUsers" minWidth="200.0" style="-fx-min-height: 45px;"/>
-                    <Label text="Staff &amp; Permissions" style="-fx-text-fill: #718096; -fx-font-size: 12px;"/>
+                <VBox alignment="CENTER" spacing="12.0" style="-fx-background-color: white; -fx-background-radius: 12px; -fx-padding: 40px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 18, 0, 0, 4); -fx-border-color: #d1d5db; -fx-border-width: 2px; -fx-border-radius: 12px;">
+                    <Label text="[ USERS ]" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-text-fill: #1f2937;"/>
+                    <Button fx:id="usersButton" text="MANAGE USERS" onAction="#handleUsers" minWidth="240.0" style="-fx-min-height: 50px;"/>
+                    <Label text="STAFF &amp; PERMISSIONS" style="-fx-text-fill: #6b7280; -fx-font-size: 11px; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
                 </VBox>
             </HBox>
             
-            <Button fx:id="logoutButton" text="🚪 Logout" onAction="#handleLogout" minWidth="250.0" style="-fx-min-height: 45px; -fx-background-color: #e53e3e; -fx-background-radius: 10px;">
+            <Button fx:id="logoutButton" text="[ LOGOUT ]" onAction="#handleLogout" minWidth="280.0" style="-fx-min-height: 50px; -fx-background-color: linear-gradient(to bottom, #dc2626, #b91c1c); -fx-background-radius: 8px; -fx-font-size: 15px;">
                 <VBox.margin>
                     <Insets top="20.0"/>
                 </VBox.margin>

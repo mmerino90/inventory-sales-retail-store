@@ -203,7 +203,15 @@ public class UserManagementController implements Initializable {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/admin_dashboard.fxml"));
             Stage stage = (Stage) backButton.getScene().getWindow();
-            stage.setScene(new Scene(root, 1200, 800));
+            
+            // Get screen bounds for full-screen experience
+            javafx.stage.Screen screen = javafx.stage.Screen.getPrimary();
+            javafx.geometry.Rectangle2D bounds = screen.getVisualBounds();
+            
+            Scene scene = new Scene(root, bounds.getWidth(), bounds.getHeight());
+            scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
+            
+            stage.setScene(scene);
             stage.setMaximized(true);
         } catch (Exception e) {
             e.printStackTrace();
