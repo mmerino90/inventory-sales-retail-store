@@ -133,30 +133,41 @@ public class AnalyticsController implements Initializable {
     
     private void loadCategoryPieChart() {
         try {
-            List<Product> allProducts = productDAO.getAllProducts();
+            List<Sale> allSales = saleDAO.getAllSales();
             
-            if (allProducts.isEmpty()) {
+            if (allSales.isEmpty()) {
                 return;
             }
             
-            // Group products by category and count
-            Map<String, Long> categoryCount = allProducts.stream()
-                .collect(Collectors.groupingBy(Product::getCategory, Collectors.counting()));
+            // Group sales by category and sum quantities
+            Map<String, Integer> categoryQuantities = new HashMap<>();
+            
+            for (Sale sale : allSales) {
+                String category = sale.getCategory();
+                if (category != null) {
+                    categoryQuantities.merge(category, sale.getQuantity(), Integer::sum);
+                }
+            }
+            
+            // Calculate total quantity
+            int totalQuantity = categoryQuantities.values().stream()
+                .mapToInt(Integer::intValue)
+                .sum();
             
             // Create pie chart data
             ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
             
-            categoryCount.forEach((category, count) -> {
-                double percentage = (count * 100.0) / allProducts.size();
+            categoryQuantities.forEach((category, quantity) -> {
+                double percentage = (quantity * 100.0) / totalQuantity;
                 pieChartData.add(new PieChart.Data(
                     category + " (" + String.format("%.1f%%", percentage) + ")", 
-                    count
+                    quantity
                 ));
             });
             
             categoryPieChart.setData(pieChartData);
             categoryPieChart.setLabelsVisible(true);
-            categoryPieChart.setLegendVisible(true);
+            categoryPieChart.setLegendVisible(false);
             
         } catch (SQLException e) {
             e.printStackTrace();
