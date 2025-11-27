@@ -60,7 +60,7 @@
                 </GridPane>
                 
                 <!-- Charts Section -->
-                <HBox spacing="25.0" alignment="CENTER">
+                <HBox spacing="25.0" alignment="TOP_CENTER">
                     <!-- Bar Chart: Units Sold by Product -->
                     <VBox spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 25px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 12, 0, 0, 3);">
                         <Label text="[ TOP PRODUCTS BY UNITS SOLD ]" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2d3748; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
@@ -77,7 +77,7 @@
                     <!-- Pie Chart: Products by Category -->
                     <VBox spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 25px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 12, 0, 0, 3);">
                         <Label text="[ PRODUCT DISTRIBUTION BY CATEGORY ]" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2d3748; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
-                        <PieChart fx:id="categoryPieChart" prefWidth="550.0" prefHeight="400.0" legendVisible="true" legendSide="RIGHT" animated="true" labelsVisible="true"/>
+                        <PieChart fx:id="categoryPieChart" prefWidth="700.0" prefHeight="450.0" legendVisible="false" animated="true" labelsVisible="true"/>
                     </VBox>
                 </HBox>
             </VBox>
