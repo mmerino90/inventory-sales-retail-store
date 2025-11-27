@@ -6,6 +6,7 @@ public class Sale {
     private int id;
     private int productId;
     private String productName;
+    private String category;
     private int quantity;
     private double totalPrice;
     private LocalDateTime saleDate;
@@ -44,6 +45,14 @@ public class Sale {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public int getQuantity() {
