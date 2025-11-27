@@ -12,7 +12,7 @@ public class SaleDAO {
 
     public List<Sale> getAllSales() throws SQLException {
         List<Sale> sales = new ArrayList<>();
-        String query = "SELECT s.*, p.name as product_name FROM sales s " +
+        String query = "SELECT s.*, p.name as product_name, p.category FROM sales s " +
                       "LEFT JOIN products p ON s.product_id = p.id " +
                       "ORDER BY s.sale_date DESC";
         try (Connection conn = Database.getConnection();
@@ -28,6 +28,7 @@ public class SaleDAO {
                     rs.getInt("user_id")
                 );
                 sale.setProductName(rs.getString("product_name"));
+                sale.setCategory(rs.getString("category"));
                 sales.add(sale);
             }
         }
@@ -49,7 +50,7 @@ public class SaleDAO {
 
     public List<Sale> getSalesByDateRange(LocalDateTime startDate, LocalDateTime endDate) throws SQLException {
         List<Sale> sales = new ArrayList<>();
-        String query = "SELECT s.*, p.name as product_name FROM sales s " +
+        String query = "SELECT s.*, p.name as product_name, p.category FROM sales s " +
                       "LEFT JOIN products p ON s.product_id = p.id " +
                       "WHERE s.sale_date BETWEEN ? AND ? " +
                       "ORDER BY s.sale_date DESC";
@@ -68,6 +69,7 @@ public class SaleDAO {
                     rs.getInt("user_id")
                 );
                 sale.setProductName(rs.getString("product_name"));
+                sale.setCategory(rs.getString("category"));
                 sales.add(sale);
             }
         }
@@ -75,7 +77,7 @@ public class SaleDAO {
     }
 
     public Sale getSaleById(int id) throws SQLException {
-        String query = "SELECT s.*, p.name as product_name FROM sales s " +
+        String query = "SELECT s.*, p.name as product_name, p.category FROM sales s " +
                       "LEFT JOIN products p ON s.product_id = p.id " +
                       "WHERE s.id = ?";
         try (Connection conn = Database.getConnection();
@@ -92,6 +94,7 @@ public class SaleDAO {
                     rs.getInt("user_id")
                 );
                 sale.setProductName(rs.getString("product_name"));
+                sale.setCategory(rs.getString("category"));
                 return sale;
             }
         }
