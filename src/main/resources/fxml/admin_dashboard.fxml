@@ -12,13 +12,14 @@
                 <padding>
                     <Insets bottom="20.0" left="30.0" right="30.0" top="20.0"/>
                 </padding>
-                <Label text="[ ADMIN DASHBOARD ]" textFill="WHITE" styleClass="title">
+                <Label text="ADMIN DASHBOARD" textFill="WHITE" styleClass="title">
                     <font>
                         <Font name="Consolas" size="28.0"/>
                     </font>
                 </Label>
                 <Region HBox.hgrow="ALWAYS"/>
                 <Label fx:id="welcomeLabel" text="WELCOME" textFill="WHITE" style="-fx-font-size: 16px; -fx-font-weight: 700; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
+                <Button fx:id="logoutButton" text="LOGOUT" onAction="#handleLogout" style="-fx-background-color: #dc2626; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8px 16px; -fx-background-radius: 6px; -fx-font-size: 13px;"/>
             </HBox>
         </VBox>
     </top>
@@ -56,12 +57,6 @@
                     <Label text="STAFF &amp; PERMISSIONS" style="-fx-text-fill: #6b7280; -fx-font-size: 11px; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
                 </VBox>
             </HBox>
-            
-            <Button fx:id="logoutButton" text="[ LOGOUT ]" onAction="#handleLogout" minWidth="280.0" style="-fx-min-height: 50px; -fx-background-color: linear-gradient(to bottom, #dc2626, #b91c1c); -fx-background-radius: 8px; -fx-font-size: 15px;">
-                <VBox.margin>
-                    <Insets top="20.0"/>
-                </VBox.margin>
-            </Button>
         </VBox>
     </center>
 </BorderPane>
