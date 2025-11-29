@@ -10,7 +10,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // Use shared helper to load the initial login view
         SceneUtil.switchScene(primaryStage, "/fxml/login.fxml", APP_TITLE);
     }
 

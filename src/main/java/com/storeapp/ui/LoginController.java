@@ -58,7 +58,6 @@ public class LoginController {
 
     private void loadDashboard(User user) {
         try {
-            // Set current user in session
             UserSession.getInstance().setCurrentUser(user);
 
             Stage stage = (Stage) loginButton.getScene().getWindow();

@@ -53,7 +53,6 @@ public class UserManagementController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Check if user is admin
         if (!UserSession.getInstance().isAdmin()) {
             showAlert("Access Denied", "You do not have permission to access this page.");
             handleBack(null);
@@ -63,10 +62,9 @@ public class UserManagementController implements Initializable {
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
 
-        // Setup role combo box
         roleComboBox.setItems(FXCollections.observableArrayList("admin", "employee"));
 
-        // Add action buttons (Edit and Delete)
+
         actionsColumn.setCellFactory(param -> new TableCell<User, Void>() {
             private final Button editButton = new Button("Edit");
             private final Button deleteButton = new Button("Delete");
@@ -125,15 +123,9 @@ public class UserManagementController implements Initializable {
 
         try {
             if (selectedUser == null) {
-                // Add new user
-                User newUser = new User();
-                newUser.setUsername(username);
-                newUser.setPassword(password); // PasswordUtil used in DAO
-                newUser.setRole(role);
-                userDAO.addUser(newUser);
+                userDAO.addUser(new User(0, username, password, role));
                 showAlert("Success", "User added successfully!");
             } else {
-                // Update existing user
                 selectedUser.setUsername(username);
                 if (!password.isEmpty()) {
                     selectedUser.setPassword(password);
@@ -156,13 +148,12 @@ public class UserManagementController implements Initializable {
     private void handleEditUser(User user) {
         selectedUser = user;
         usernameField.setText(user.getUsername());
-        passwordField.setText(""); // Don't show password
+        passwordField.setText("");
         roleComboBox.setValue(user.getRole());
         addUserButton.setText("Update User");
     }
 
     private void handleDeleteUser(User user) {
-        // Prevent deleting current user
         if (user.getId() == UserSession.getInstance().getCurrentUser().getId()) {
             showAlert("Cannot Delete", "You cannot delete your own account.");
             return;
@@ -207,7 +198,6 @@ public class UserManagementController implements Initializable {
     }
 
     private void showAlert(String title, String message) {
-        // Minimal refactor: delegate to shared AlertUtil
         AlertUtil.info(title, message);
     }
 }

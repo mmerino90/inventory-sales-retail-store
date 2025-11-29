@@ -2,7 +2,7 @@ package com.storeapp.ui;
 
 import com.storeapp.dao.SaleDAO;
 import com.storeapp.model.Sale;
-import com.storeapp.util.SceneUtil;   // ⬅️ NEW import
+import com.storeapp.util.SceneUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -88,7 +88,6 @@ public class AnalyticsController implements Initializable {
         try {
             List<Sale> allSales = saleDAO.getAllSales();
 
-            // Group sales by product and sum quantities
             Map<Integer, Integer> productSales = new HashMap<>();
             Map<Integer, String> productNames = new HashMap<>();
 
@@ -99,17 +98,14 @@ public class AnalyticsController implements Initializable {
                 }
             }
 
-            // Create bar chart series
             XYChart.Series<String, Number> series = new XYChart.Series<>();
             series.setName("Units Sold");
 
-            // Sort by quantity sold (descending) and take top 10
             productSales.entrySet().stream()
                     .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
                     .limit(10)
                     .forEach(entry -> {
                         String productName = productNames.getOrDefault(entry.getKey(), "Unknown");
-                        // Truncate long names for better display
                         String displayName = productName.length() > 15 ? productName.substring(0, 12) + "..." : productName;
                         series.getData().add(new XYChart.Data<>(displayName, entry.getValue()));
                     });
@@ -118,7 +114,6 @@ public class AnalyticsController implements Initializable {
             unitsBarChart.getData().add(series);
             unitsBarChart.setLegendVisible(false);
 
-            // Style the chart
             xAxis.setLabel("Product Name");
             yAxis.setLabel("Units Sold");
             xAxis.setTickLabelRotation(45);
@@ -136,7 +131,6 @@ public class AnalyticsController implements Initializable {
                 return;
             }
 
-            // Group sales by category and sum quantities
             Map<String, Integer> categoryQuantities = new HashMap<>();
 
             for (Sale sale : allSales) {
@@ -146,12 +140,10 @@ public class AnalyticsController implements Initializable {
                 }
             }
 
-            // Calculate total quantity
             int totalQuantity = categoryQuantities.values().stream()
                     .mapToInt(Integer::intValue)
                     .sum();
 
-            // Create pie chart data
             ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
 
             categoryQuantities.forEach((category, quantity) -> {

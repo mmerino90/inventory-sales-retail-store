@@ -22,9 +22,7 @@ public class UserDAO {
                 String storedPassword = rs.getString("password");
                 String role = rs.getString("role");
                 
-                // Check if password matches (handle both hashed and plain text for migration)
                 if (PasswordUtil.verifyPassword(password, storedPassword) || password.equals(storedPassword)) {
-                    // If plain text matched, update to hashed version
                     if (password.equals(storedPassword)) {
                         updatePasswordHash(userId, password);
                     }

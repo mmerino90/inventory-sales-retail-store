@@ -88,19 +88,16 @@ public class ProductListController implements Initializable {
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
 
-        // Auto-populate fields when a row is selected
         productTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 populateFields(newSelection);
             }
         });
 
-        // Real-time search functionality
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             filterProducts(newValue);
         });
 
-        // Add row factory for low stock highlighting
         productTable.setRowFactory(tv -> new TableRow<Product>() {
             @Override
             protected void updateItem(Product product, boolean empty) {
@@ -228,7 +225,6 @@ public class ProductListController implements Initializable {
     }
 
     private void showAlert(String title, String message) {
-        // Minimal refactor: delegate to shared AlertUtil
         AlertUtil.info(title, message);
     }
 

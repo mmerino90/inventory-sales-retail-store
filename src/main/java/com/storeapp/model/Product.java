@@ -68,7 +68,6 @@ public class Product {
         this.sellingPrice = sellingPrice;
     }
 
-    // Keep getPrice for backward compatibility
     public double getPrice() {
         return sellingPrice;
     }

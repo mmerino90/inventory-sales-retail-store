@@ -29,20 +29,16 @@ public class Database {
 
     private static void initializeDatabase() {
         try {
-            // Check if tables already exist
             boolean tablesExist = connection.getMetaData().getTables(null, null, "users", null).next();
             
             if (!tablesExist) {
                 System.out.println("Initializing database from schema.sql...");
-                
-                // Try to read from file system first
                 String schemaPath = "db/schema.sql";
                 String sql;
                 
                 if (Files.exists(Paths.get(schemaPath))) {
                     sql = new String(Files.readAllBytes(Paths.get(schemaPath)));
                 } else {
-                    // Fall back to classpath resource
                     try (InputStream is = Database.class.getClassLoader().getResourceAsStream("schema.sql")) {
                         if (is == null) {
                             System.err.println("Could not find schema.sql");
@@ -53,7 +49,6 @@ public class Database {
                     }
                 }
                 
-                // Execute SQL statements
                 String[] statements = sql.split(";");
                 try (Statement stmt = connection.createStatement()) {
                     for (String statement : statements) {

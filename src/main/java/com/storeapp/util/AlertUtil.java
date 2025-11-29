@@ -3,14 +3,9 @@ package com.storeapp.util;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-/**
- * Utility class to centralize alert/dialog creation.
- */
 public final class AlertUtil {
 
-    private AlertUtil() {
-        // Utility class - no instances
-    }
+    private AlertUtil() {}
 
     public static void info(String title, String message) {
         show(AlertType.INFORMATION, title, message);

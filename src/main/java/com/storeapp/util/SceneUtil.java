@@ -11,9 +11,7 @@ public class SceneUtil {
 
     private static final String STYLESHEET = "/application.css";
 
-    private SceneUtil() {
-        // utility class, no instances
-    }
+    private SceneUtil() {}
 
     public static void switchScene(Stage stage, String fxmlPath, String title) {
         try {

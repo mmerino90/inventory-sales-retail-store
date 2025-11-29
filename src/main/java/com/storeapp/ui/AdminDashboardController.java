@@ -42,18 +42,14 @@ public class AdminDashboardController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         UserSession session = UserSession.getInstance();
 
-        // Set welcome message
         if (session.getCurrentUser() != null) {
             welcomeLabel.setText("Welcome, " + session.getCurrentUser().getUsername());
         }
 
-        // Hide/show sections based on role
         if (session.isAdmin()) {
-            // Admin sees everything
             adminOnlySection.setVisible(true);
             adminOnlySection.setManaged(true);
         } else {
-            // Employees see Products and Sales only
             adminOnlySection.setVisible(false);
             adminOnlySection.setManaged(false);
         }

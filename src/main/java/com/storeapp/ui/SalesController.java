@@ -90,7 +90,6 @@ public class SalesController implements Initializable {
         totalPriceColumn.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
         saleDateColumn.setCellValueFactory(new PropertyValueFactory<>("saleDate"));
 
-        // Format date column to display in readable format
         saleDateColumn.setCellFactory(column -> new TableCell<Sale, LocalDateTime>() {
             @Override
             protected void updateItem(LocalDateTime item, boolean empty) {
@@ -103,7 +102,6 @@ public class SalesController implements Initializable {
             }
         });
 
-        // Add delete button to actions column
         actionsColumn.setCellFactory(param -> new TableCell<Sale, Void>() {
             private final Button deleteButton = new Button("Delete");
 
@@ -132,7 +130,6 @@ public class SalesController implements Initializable {
     }
 
     private void initializeFilters() {
-        // Populate filter product combo with all products
         try {
             ObservableList<String> productNames = FXCollections.observableArrayList();
             productNames.add("All Products");
@@ -169,14 +166,12 @@ public class SalesController implements Initializable {
         filteredSalesList.addAll(
                 salesList.stream()
                         .filter(sale -> {
-                            // Filter by date range
                             if (fromDate != null && sale.getSaleDate().toLocalDate().isBefore(fromDate)) {
                                 return false;
                             }
                             if (toDate != null && sale.getSaleDate().toLocalDate().isAfter(toDate)) {
                                 return false;
                             }
-                            // Filter by product
                             if (selectedProduct != null && !selectedProduct.equals("All Products") && !sale.getProductName().equals(selectedProduct)) {
                                 return false;
                             }
@@ -203,7 +198,6 @@ public class SalesController implements Initializable {
             ObservableList<Product> products = FXCollections.observableArrayList(productDAO.getAllProducts());
             productComboBox.setItems(products);
 
-            // Set cell factory to display product names
             productComboBox.setCellFactory(param -> new ListCell<Product>() {
                 @Override
                 protected void updateItem(Product item, boolean empty) {
@@ -216,7 +210,6 @@ public class SalesController implements Initializable {
                 }
             });
 
-            // Set button cell to display selected product name
             productComboBox.setButtonCell(new ListCell<Product>() {
                 @Override
                 protected void updateItem(Product item, boolean empty) {
@@ -240,7 +233,6 @@ public class SalesController implements Initializable {
             try {
                 int quantity = Integer.parseInt(quantityField.getText());
 
-                // Validate stock availability
                 if (quantity <= 0) {
                     showAlert("Invalid Quantity", "Quantity must be greater than 0.");
                     return;
@@ -261,17 +253,15 @@ public class SalesController implements Initializable {
                 sale.setQuantity(quantity);
                 sale.setTotalPrice(totalPrice);
                 sale.setSaleDate(LocalDateTime.now());
-                // Get current user ID from session
                 sale.setUserId(UserSession.getInstance().getCurrentUser().getId());
 
                 saleDAO.addSale(sale);
 
-                // Update product quantity
                 selectedProduct.setQuantity(selectedProduct.getQuantity() - quantity);
                 productDAO.updateProduct(selectedProduct);
 
                 loadSales();
-                loadProducts(); // Reload products to show updated stock
+                loadProducts();
                 quantityField.clear();
                 productComboBox.getSelectionModel().clearSelection();
 
@@ -296,14 +286,12 @@ public class SalesController implements Initializable {
         confirmAlert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 try {
-                    // Get product and restore stock
                     Product product = productDAO.getProductById(sale.getProductId());
                     if (product != null) {
                         product.setQuantity(product.getQuantity() + sale.getQuantity());
                         productDAO.updateProduct(product);
                     }
 
-                    // Delete the sale
                     saleDAO.deleteSale(sale.getId());
 
                     loadSales();
@@ -318,7 +306,6 @@ public class SalesController implements Initializable {
     }
 
     private void showAlert(String title, String message) {
-        // Minimal refactor: delegate to shared AlertUtil
         AlertUtil.info(title, message);
     }
 
@@ -334,7 +321,6 @@ public class SalesController implements Initializable {
         File file = fileChooser.showSaveDialog(exportCsvButton.getScene().getWindow());
         if (file != null) {
             try {
-                // Export currently filtered sales
                 ExportUtil.exportToCSV(filteredSalesList, file);
                 showAlert("Export Successful", 
                         "Sales report exported to CSV successfully!\n" +
@@ -359,7 +345,6 @@ public class SalesController implements Initializable {
         File file = fileChooser.showSaveDialog(exportPdfButton.getScene().getWindow());
         if (file != null) {
             try {
-                // Export currently filtered sales
                 ExportUtil.exportToPDF(filteredSalesList, file);
                 showAlert("Export Successful", 
                         "Sales report exported to PDF successfully!\n" +

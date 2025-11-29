@@ -16,20 +16,13 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-/**
- * Utility class for exporting sales data to CSV and PDF formats
- */
 public final class ExportUtil {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
 
-    private ExportUtil() {
-        // Utility class - no instances
-    }
+    private ExportUtil() {}
 
-    /**
-     * Export sales data to CSV format
-     */
+
     public static void exportToCSV(List<Sale> sales, File file) throws IOException {
         try (FileWriter writer = new FileWriter(file)) {
             // Write CSV header
@@ -50,9 +43,6 @@ public final class ExportUtil {
         }
     }
 
-    /**
-     * Export sales data to PDF format
-     */
     public static void exportToPDF(List<Sale> sales, File file) throws IOException {
         try (PdfWriter writer = new PdfWriter(file);
              PdfDocument pdf = new PdfDocument(writer);
@@ -120,9 +110,6 @@ public final class ExportUtil {
         }
     }
 
-    /**
-     * Escape special characters in CSV fields
-     */
     private static String escapeCsv(String value) {
         if (value == null) {
             return "";
