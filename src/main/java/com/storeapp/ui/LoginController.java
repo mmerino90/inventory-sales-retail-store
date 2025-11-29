@@ -25,17 +25,45 @@ public class LoginController {
     private PasswordField passwordField;
 
     @FXML
+    private TextField passwordTextField;
+
+    @FXML
+    private Button togglePasswordButton;
+
+    @FXML
     private Button loginButton;
 
     @FXML
     private Label messageLabel;
 
     private final UserDAO userDAO = new UserDAO();
+    private boolean isPasswordVisible = false;
+
+    @FXML
+    public void togglePasswordVisibility(ActionEvent event) {
+        isPasswordVisible = !isPasswordVisible;
+        
+        if (isPasswordVisible) {
+            passwordTextField.setText(passwordField.getText());
+            passwordTextField.setVisible(true);
+            passwordTextField.setManaged(true);
+            passwordField.setVisible(false);
+            passwordField.setManaged(false);
+            togglePasswordButton.setText("🙈");
+        } else {
+            passwordField.setText(passwordTextField.getText());
+            passwordField.setVisible(true);
+            passwordField.setManaged(true);
+            passwordTextField.setVisible(false);
+            passwordTextField.setManaged(false);
+            togglePasswordButton.setText("👁");
+        }
+    }
 
     @FXML
     public void handleLogin(ActionEvent event) {
         String username = usernameField.getText();
-        String password = passwordField.getText();
+        String password = isPasswordVisible ? passwordTextField.getText() : passwordField.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
             messageLabel.setText("Please enter username and password");

@@ -38,7 +38,15 @@
         
         <VBox spacing="15.0" maxWidth="400.0" minWidth="400.0">
             <Label text="PASSWORD" style="-fx-font-weight: 700; -fx-text-fill: #1f2937; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 13px;"/>
-            <PasswordField fx:id="passwordField" promptText="ENTER PASSWORD" style="-fx-min-height: 50px; -fx-font-size: 15px;"/>
+            <StackPane>
+                <PasswordField fx:id="passwordField" promptText="ENTER PASSWORD" style="-fx-min-height: 50px; -fx-font-size: 15px;"/>
+                <TextField fx:id="passwordTextField" promptText="ENTER PASSWORD" style="-fx-min-height: 50px; -fx-font-size: 15px;" visible="false" managed="false"/>
+                <Button fx:id="togglePasswordButton" text="👁" onAction="#togglePasswordVisibility" style="-fx-background-color: transparent; -fx-text-fill: #6b7280; -fx-font-size: 20px; -fx-cursor: hand; -fx-padding: 5px 10px;" StackPane.alignment="CENTER_RIGHT">
+                    <StackPane.margin>
+                        <Insets right="10.0"/>
+                    </StackPane.margin>
+                </Button>
+            </StackPane>
         </VBox>
         
         <Button fx:id="loginButton" text="[ LOGIN ]" onAction="#handleLogin" maxWidth="400.0" minWidth="400.0" style="-fx-min-height: 52px; -fx-font-size: 16px; -fx-font-weight: bold;">
