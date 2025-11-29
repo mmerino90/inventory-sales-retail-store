@@ -1,7 +1,6 @@
 package com.storeapp.ui;
 
 import com.storeapp.util.SceneUtil;
-import com.storeapp.util.ThemeManager;
 import com.storeapp.util.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,16 +36,7 @@ public class AdminDashboardController implements Initializable {
     private Button logoutButton;
 
     @FXML
-    private Button auditLogButton;
-
-    @FXML
-    private Button themeToggleButton;
-
-    @FXML
     private HBox adminOnlySection;
-
-    @FXML
-    private HBox auditLogSection;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -56,18 +46,12 @@ public class AdminDashboardController implements Initializable {
             welcomeLabel.setText("Welcome, " + session.getCurrentUser().getUsername());
         }
 
-        themeToggleButton.setText(ThemeManager.getInstance().getCurrentThemeIcon());
-
         if (session.isAdmin()) {
             adminOnlySection.setVisible(true);
             adminOnlySection.setManaged(true);
-            auditLogSection.setVisible(true);
-            auditLogSection.setManaged(true);
         } else {
             adminOnlySection.setVisible(false);
             adminOnlySection.setManaged(false);
-            auditLogSection.setVisible(false);
-            auditLogSection.setManaged(false);
         }
     }
 
@@ -89,18 +73,6 @@ public class AdminDashboardController implements Initializable {
     @FXML
     public void handleUsers(ActionEvent event) {
         loadView("/fxml/users_management.fxml");
-    }
-
-    @FXML
-    public void handleAuditLog(ActionEvent event) {
-        loadView("/com/storeapp/fxml/audit-log.fxml");
-    }
-
-    @FXML
-    public void handleThemeToggle(ActionEvent event) {
-        ThemeManager themeManager = ThemeManager.getInstance();
-        themeManager.toggleTheme(themeToggleButton.getScene());
-        themeToggleButton.setText(themeManager.getCurrentThemeIcon());
     }
 
     @FXML

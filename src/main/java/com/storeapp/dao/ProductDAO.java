@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDAO {
-    private final AuditLogDAO auditLogDAO = new AuditLogDAO();
 
     public List<Product> getAllProducts() throws SQLException {
         List<Product> products = new ArrayList<>();
@@ -54,7 +53,7 @@ public class ProductDAO {
     public void addProduct(Product product) throws SQLException {
         String query = "INSERT INTO products (name, description, cost_price, selling_price, quantity, category, supplier, expiry_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = Database.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, product.getName());
             stmt.setString(2, product.getDescription());
             stmt.setDouble(3, product.getCostPrice());
@@ -64,18 +63,10 @@ public class ProductDAO {
             stmt.setString(7, product.getSupplier());
             stmt.setDate(8, product.getExpiryDate() != null ? Date.valueOf(product.getExpiryDate()) : null);
             stmt.executeUpdate();
-            
-            ResultSet rs = stmt.getGeneratedKeys();
-            if (rs.next()) {
-                int productId = rs.getInt(1);
-                auditLogDAO.logAction("CREATE", "Product", productId, null, 
-                    String.format("%s - $%.2f - Qty: %d", product.getName(), product.getSellingPrice(), product.getQuantity()));
-            }
         }
     }
 
     public void updateProduct(Product product) throws SQLException {
-        Product oldProduct = getProductById(product.getId());
         String query = "UPDATE products SET name = ?, description = ?, cost_price = ?, selling_price = ?, quantity = ?, category = ?, supplier = ?, expiry_date = ? WHERE id = ?";
         try (Connection conn = Database.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -89,27 +80,15 @@ public class ProductDAO {
             stmt.setDate(8, product.getExpiryDate() != null ? Date.valueOf(product.getExpiryDate()) : null);
             stmt.setInt(9, product.getId());
             stmt.executeUpdate();
-            
-            if (oldProduct != null) {
-                String oldValue = String.format("%s - $%.2f - Qty: %d", oldProduct.getName(), oldProduct.getSellingPrice(), oldProduct.getQuantity());
-                String newValue = String.format("%s - $%.2f - Qty: %d", product.getName(), product.getSellingPrice(), product.getQuantity());
-                auditLogDAO.logAction("UPDATE", "Product", product.getId(), oldValue, newValue);
-            }
         }
     }
 
     public void deleteProduct(int id) throws SQLException {
-        Product product = getProductById(id);
         String query = "DELETE FROM products WHERE id = ?";
         try (Connection conn = Database.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
-            
-            if (product != null) {
-                String oldValue = String.format("%s - $%.2f - Qty: %d", product.getName(), product.getSellingPrice(), product.getQuantity());
-                auditLogDAO.logAction("DELETE", "Product", id, oldValue, null);
-            }
         }
     }
 }

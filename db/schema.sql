@@ -31,20 +31,6 @@ CREATE TABLE IF NOT EXISTS sales (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
--- Create Audit Logs table
-CREATE TABLE IF NOT EXISTS audit_logs (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER NOT NULL,
-    username TEXT NOT NULL,
-    action TEXT NOT NULL,
-    entity_type TEXT NOT NULL,
-    entity_id INTEGER NOT NULL,
-    old_value TEXT,
-    new_value TEXT,
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id)
-);
-
 -- Insert default users
 -- Admin: username=admin, password=admin123
 -- Employee: username=employee, password=employee123

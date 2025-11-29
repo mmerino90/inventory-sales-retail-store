@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SaleDAO {
-    private final AuditLogDAO auditLogDAO = new AuditLogDAO();
 
     public List<Sale> getAllSales() throws SQLException {
         List<Sale> sales = new ArrayList<>();
@@ -39,20 +38,13 @@ public class SaleDAO {
     public void addSale(Sale sale) throws SQLException {
         String query = "INSERT INTO sales (product_id, quantity, total_price, sale_date, user_id) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = Database.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, sale.getProductId());
             stmt.setInt(2, sale.getQuantity());
             stmt.setDouble(3, sale.getTotalPrice());
             stmt.setTimestamp(4, Timestamp.valueOf(sale.getSaleDate()));
             stmt.setInt(5, sale.getUserId());
             stmt.executeUpdate();
-            
-            ResultSet rs = stmt.getGeneratedKeys();
-            if (rs.next()) {
-                int saleId = rs.getInt(1);
-                auditLogDAO.logAction("CREATE", "Sale", saleId, null, 
-                    String.format("Product ID: %d - Qty: %d - Total: $%.2f", sale.getProductId(), sale.getQuantity(), sale.getTotalPrice()));
-            }
         }
     }
 
@@ -110,17 +102,11 @@ public class SaleDAO {
     }
 
     public void deleteSale(int id) throws SQLException {
-        Sale sale = getSaleById(id);
         String query = "DELETE FROM sales WHERE id = ?";
         try (Connection conn = Database.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
-            
-            if (sale != null) {
-                String oldValue = String.format("Product ID: %d - Qty: %d - Total: $%.2f", sale.getProductId(), sale.getQuantity(), sale.getTotalPrice());
-                auditLogDAO.logAction("DELETE", "Sale", id, oldValue, null);
-            }
         }
     }
 }

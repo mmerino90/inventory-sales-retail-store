@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 
 public class SceneUtil {
 
+    private static final String STYLESHEET = "/application.css";
+
     private SceneUtil() {}
 
     public static void switchScene(Stage stage, String fxmlPath, String title) {
@@ -18,8 +20,7 @@ public class SceneUtil {
 
             Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
             Scene scene = new Scene(root, bounds.getWidth(), bounds.getHeight());
-            
-            ThemeManager.getInstance().applyTheme(scene);
+            scene.getStylesheets().add(SceneUtil.class.getResource(STYLESHEET).toExternalForm());
 
             stage.setTitle(title);
             stage.setScene(scene);
