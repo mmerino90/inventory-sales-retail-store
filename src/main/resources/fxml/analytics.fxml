@@ -12,8 +12,8 @@
                 <padding>
                     <Insets bottom="20.0" left="30.0" right="30.0" top="20.0"/>
                 </padding>
-                <Button fx:id="backButton" text="[ BACK ]" onAction="#handleBack" style="-fx-background-color: rgba(255,255,255,0.95); -fx-text-fill: #667eea; -fx-font-weight: bold; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-background-radius: 8px; -fx-padding: 10px 20px;"/>
-                <Label text="[ ANALYTICS DASHBOARD ]" style="-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
+                <Button fx:id="backButton" text="BACK" onAction="#handleBack" style="-fx-background-color: rgba(255,255,255,0.95); -fx-text-fill: #667eea; -fx-font-weight: bold; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-background-radius: 8px; -fx-padding: 10px 20px;"/>
+                <Label text="ANALYTICS DASHBOARD" style="-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
             </HBox>
         </VBox>
     </top>
@@ -63,7 +63,7 @@
                 <HBox spacing="25.0" alignment="TOP_CENTER">
                     <!-- Bar Chart: Units Sold by Product -->
                     <VBox spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 25px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 12, 0, 0, 3);">
-                        <Label text="[ TOP PRODUCTS BY UNITS SOLD ]" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2d3748; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
+                        <Label text="TOP PRODUCTS BY UNITS SOLD" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2d3748; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
                         <BarChart fx:id="unitsBarChart" prefWidth="500.0" prefHeight="350.0" legendVisible="false" animated="true" barGap="3" categoryGap="15">
                             <xAxis>
                                 <CategoryAxis label="Product Name" side="BOTTOM" fx:id="xAxis" tickLabelRotation="45" tickLabelFill="#2d3748"/>
@@ -76,7 +76,7 @@
                     
                     <!-- Pie Chart: Products by Category -->
                     <VBox spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-padding: 25px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 12, 0, 0, 3);">
-                        <Label text="[ PRODUCT DISTRIBUTION BY CATEGORY ]" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2d3748; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
+                        <Label text="PRODUCT DISTRIBUTION BY CATEGORY" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2d3748; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
                         <PieChart fx:id="categoryPieChart" prefWidth="700.0" prefHeight="450.0" legendVisible="false" animated="true" labelsVisible="true"/>
                     </VBox>
                 </HBox>
