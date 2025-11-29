@@ -4,6 +4,8 @@ import com.storeapp.dao.ProductDAO;
 import com.storeapp.dao.SaleDAO;
 import com.storeapp.model.Product;
 import com.storeapp.model.Sale;
+import com.storeapp.util.AlertUtil;
+import com.storeapp.util.SceneUtil;
 import com.storeapp.util.UserSession;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -151,30 +152,30 @@ public class SalesController implements Initializable {
     @FXML
     public void handleFilter(ActionEvent event) {
         filteredSalesList.clear();
-        
+
         java.time.LocalDate fromDate = fromDatePicker.getValue();
         java.time.LocalDate toDate = toDatePicker.getValue();
         String selectedProduct = filterProductCombo.getValue();
-        
+
         filteredSalesList.addAll(
-            salesList.stream()
-                .filter(sale -> {
-                    // Filter by date range
-                    if (fromDate != null && sale.getSaleDate().toLocalDate().isBefore(fromDate)) {
-                        return false;
-                    }
-                    if (toDate != null && sale.getSaleDate().toLocalDate().isAfter(toDate)) {
-                        return false;
-                    }
-                    // Filter by product
-                    if (selectedProduct != null && !selectedProduct.equals("All Products") && !sale.getProductName().equals(selectedProduct)) {
-                        return false;
-                    }
-                    return true;
-                })
-                .collect(java.util.stream.Collectors.toList())
+                salesList.stream()
+                        .filter(sale -> {
+                            // Filter by date range
+                            if (fromDate != null && sale.getSaleDate().toLocalDate().isBefore(fromDate)) {
+                                return false;
+                            }
+                            if (toDate != null && sale.getSaleDate().toLocalDate().isAfter(toDate)) {
+                                return false;
+                            }
+                            // Filter by product
+                            if (selectedProduct != null && !selectedProduct.equals("All Products") && !sale.getProductName().equals(selectedProduct)) {
+                                return false;
+                            }
+                            return true;
+                        })
+                        .collect(java.util.stream.Collectors.toList())
         );
-        
+
         salesTable.setItems(filteredSalesList);
     }
 
@@ -192,7 +193,7 @@ public class SalesController implements Initializable {
         try {
             ObservableList<Product> products = FXCollections.observableArrayList(productDAO.getAllProducts());
             productComboBox.setItems(products);
-            
+
             // Set cell factory to display product names
             productComboBox.setCellFactory(param -> new ListCell<Product>() {
                 @Override
@@ -205,7 +206,7 @@ public class SalesController implements Initializable {
                     }
                 }
             });
-            
+
             // Set button cell to display selected product name
             productComboBox.setButtonCell(new ListCell<Product>() {
                 @Override
@@ -229,20 +230,20 @@ public class SalesController implements Initializable {
         if (selectedProduct != null && !quantityField.getText().isEmpty()) {
             try {
                 int quantity = Integer.parseInt(quantityField.getText());
-                
+
                 // Validate stock availability
                 if (quantity <= 0) {
                     showAlert("Invalid Quantity", "Quantity must be greater than 0.");
                     return;
                 }
-                
+
                 if (quantity > selectedProduct.getQuantity()) {
-                    showAlert("Insufficient Stock", 
-                        "Cannot sell " + quantity + " units. Only " + 
-                        selectedProduct.getQuantity() + " units available in stock.");
+                    showAlert("Insufficient Stock",
+                            "Cannot sell " + quantity + " units. Only " +
+                                    selectedProduct.getQuantity() + " units available in stock.");
                     return;
                 }
-                
+
                 double totalPrice = selectedProduct.getPrice() * quantity;
 
                 Sale sale = new Sale();
@@ -264,7 +265,7 @@ public class SalesController implements Initializable {
                 loadProducts(); // Reload products to show updated stock
                 quantityField.clear();
                 productComboBox.getSelectionModel().clearSelection();
-                
+
                 showAlert("Success", "Sale added successfully!");
             } catch (NumberFormatException e) {
                 showAlert("Invalid Input", "Please enter a valid number for quantity.");
@@ -276,13 +277,13 @@ public class SalesController implements Initializable {
             showAlert("Missing Information", "Please select a product and enter quantity.");
         }
     }
-    
+
     private void handleDeleteSale(Sale sale) {
         Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
         confirmAlert.setTitle("Confirm Delete");
         confirmAlert.setHeaderText("Delete Sale");
         confirmAlert.setContentText("Are you sure you want to delete this sale? This will restore the product stock.");
-        
+
         confirmAlert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 try {
@@ -292,10 +293,10 @@ public class SalesController implements Initializable {
                         product.setQuantity(product.getQuantity() + sale.getQuantity());
                         productDAO.updateProduct(product);
                     }
-                    
+
                     // Delete the sale
                     saleDAO.deleteSale(sale.getId());
-                    
+
                     loadSales();
                     loadProducts();
                     showAlert("Success", "Sale deleted and stock restored.");
@@ -306,13 +307,10 @@ public class SalesController implements Initializable {
             }
         });
     }
-    
+
     private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+        // Minimal refactor: delegate to shared AlertUtil
+        AlertUtil.info(title, message);
     }
 
     @FXML
@@ -322,19 +320,8 @@ public class SalesController implements Initializable {
 
     private void loadView(String fxmlPath) {
         try {
-            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource(fxmlPath));
-            javafx.scene.Parent root = loader.load();
             javafx.stage.Stage stage = (javafx.stage.Stage) backButton.getScene().getWindow();
-            
-            // Get screen bounds for full-screen experience
-            javafx.stage.Screen screen = javafx.stage.Screen.getPrimary();
-            javafx.geometry.Rectangle2D bounds = screen.getVisualBounds();
-            
-            javafx.scene.Scene scene = new javafx.scene.Scene(root, bounds.getWidth(), bounds.getHeight());
-            scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
-            
-            stage.setScene(scene);
-            stage.setMaximized(true);
+            SceneUtil.switchScene(stage, fxmlPath, "Retail Store Management System");
         } catch (Exception e) {
             e.printStackTrace();
         }

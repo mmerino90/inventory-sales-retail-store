@@ -2,19 +2,17 @@ package com.storeapp.ui;
 
 import com.storeapp.dao.UserDAO;
 import com.storeapp.model.User;
+import com.storeapp.util.AlertUtil;
+import com.storeapp.util.SceneUtil;
 import com.storeapp.util.UserSession;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -130,7 +128,7 @@ public class UserManagementController implements Initializable {
                 // Add new user
                 User newUser = new User();
                 newUser.setUsername(username);
-                newUser.setPassword(password); // TODO: Hash password
+                newUser.setPassword(password); // PasswordUtil used in DAO
                 newUser.setRole(role);
                 userDAO.addUser(newUser);
                 showAlert("Success", "User added successfully!");
@@ -138,7 +136,7 @@ public class UserManagementController implements Initializable {
                 // Update existing user
                 selectedUser.setUsername(username);
                 if (!password.isEmpty()) {
-                    selectedUser.setPassword(password); // TODO: Hash password
+                    selectedUser.setPassword(password);
                 }
                 selectedUser.setRole(role);
                 userDAO.updateUser(selectedUser);
@@ -201,28 +199,15 @@ public class UserManagementController implements Initializable {
     @FXML
     public void handleBack(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/admin_dashboard.fxml"));
-            Stage stage = (Stage) backButton.getScene().getWindow();
-            
-            // Get screen bounds for full-screen experience
-            javafx.stage.Screen screen = javafx.stage.Screen.getPrimary();
-            javafx.geometry.Rectangle2D bounds = screen.getVisualBounds();
-            
-            Scene scene = new Scene(root, bounds.getWidth(), bounds.getHeight());
-            scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
-            
-            stage.setScene(scene);
-            stage.setMaximized(true);
+            javafx.stage.Stage stage = (javafx.stage.Stage) backButton.getScene().getWindow();
+            SceneUtil.switchScene(stage, "/fxml/admin_dashboard.fxml", "Retail Store Management System");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+        // Minimal refactor: delegate to shared AlertUtil
+        AlertUtil.info(title, message);
     }
 }

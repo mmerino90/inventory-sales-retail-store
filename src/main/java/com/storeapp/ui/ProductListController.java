@@ -2,6 +2,8 @@ package com.storeapp.ui;
 
 import com.storeapp.dao.ProductDAO;
 import com.storeapp.model.Product;
+import com.storeapp.util.AlertUtil;
+import com.storeapp.util.SceneUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -137,13 +139,13 @@ public class ProductListController implements Initializable {
             String lowerCaseFilter = searchText.toLowerCase().trim();
             filteredList.clear();
             filteredList.addAll(
-                productList.stream()
-                    .filter(product -> 
-                        product.getName().toLowerCase().contains(lowerCaseFilter) ||
-                        product.getCategory().toLowerCase().contains(lowerCaseFilter) ||
-                        (product.getSupplier() != null && product.getSupplier().toLowerCase().contains(lowerCaseFilter))
-                    )
-                    .collect(java.util.stream.Collectors.toList())
+                    productList.stream()
+                            .filter(product ->
+                                    product.getName().toLowerCase().contains(lowerCaseFilter) ||
+                                            product.getCategory().toLowerCase().contains(lowerCaseFilter) ||
+                                            (product.getSupplier() != null && product.getSupplier().toLowerCase().contains(lowerCaseFilter))
+                            )
+                            .collect(java.util.stream.Collectors.toList())
             );
         }
         productTable.setItems(filteredList);
@@ -151,9 +153,9 @@ public class ProductListController implements Initializable {
 
     private void checkLowStock() {
         long lowStockCount = productList.stream()
-            .filter(p -> p.getQuantity() < 10)
-            .count();
-        
+                .filter(p -> p.getQuantity() < 10)
+                .count();
+
         if (lowStockCount > 0) {
             lowStockWarning.setText("⚠️" + lowStockCount + " product(s) with low stock!");
         } else {
@@ -186,7 +188,7 @@ public class ProductListController implements Initializable {
             showAlert("No Selection", "Please select a product from the table to update.");
             return;
         }
-        
+
         try {
             selected.setName(nameField.getText());
             selected.setDescription(descriptionField.getText());
@@ -213,7 +215,7 @@ public class ProductListController implements Initializable {
             showAlert("No Selection", "Please select a product from the table to delete.");
             return;
         }
-        
+
         try {
             productDAO.deleteProduct(selected.getId());
             loadProducts();
@@ -226,11 +228,8 @@ public class ProductListController implements Initializable {
     }
 
     private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+        // Minimal refactor: delegate to shared AlertUtil
+        AlertUtil.info(title, message);
     }
 
     private void populateFields(Product product) {
@@ -262,19 +261,8 @@ public class ProductListController implements Initializable {
 
     private void loadView(String fxmlPath) {
         try {
-            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource(fxmlPath));
-            javafx.scene.Parent root = loader.load();
             javafx.stage.Stage stage = (javafx.stage.Stage) backButton.getScene().getWindow();
-            
-            // Get screen bounds for full-screen experience
-            javafx.stage.Screen screen = javafx.stage.Screen.getPrimary();
-            javafx.geometry.Rectangle2D bounds = screen.getVisualBounds();
-            
-            javafx.scene.Scene scene = new javafx.scene.Scene(root, bounds.getWidth(), bounds.getHeight());
-            scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
-            
-            stage.setScene(scene);
-            stage.setMaximized(true);
+            SceneUtil.switchScene(stage, fxmlPath, "Retail Store Management System");
         } catch (Exception e) {
             e.printStackTrace();
         }
