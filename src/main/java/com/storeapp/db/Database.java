@@ -43,13 +43,14 @@ public class Database {
                     sql = new String(Files.readAllBytes(Paths.get(schemaPath)));
                 } else {
                     // Fall back to classpath resource
-                    InputStream is = Database.class.getClassLoader().getResourceAsStream("schema.sql");
-                    if (is == null) {
-                        System.err.println("Could not find schema.sql");
-                        return;
+                    try (InputStream is = Database.class.getClassLoader().getResourceAsStream("schema.sql")) {
+                        if (is == null) {
+                            System.err.println("Could not find schema.sql");
+                            return;
+                        }
+                        sql = new BufferedReader(new InputStreamReader(is))
+                                .lines().collect(Collectors.joining("\n"));
                     }
-                    sql = new BufferedReader(new InputStreamReader(is))
-                            .lines().collect(Collectors.joining("\n"));
                 }
                 
                 // Execute SQL statements

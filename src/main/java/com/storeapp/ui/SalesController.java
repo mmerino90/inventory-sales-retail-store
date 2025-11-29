@@ -5,6 +5,7 @@ import com.storeapp.dao.SaleDAO;
 import com.storeapp.model.Product;
 import com.storeapp.model.Sale;
 import com.storeapp.util.AlertUtil;
+import com.storeapp.util.ExportUtil;
 import com.storeapp.util.SceneUtil;
 import com.storeapp.util.UserSession;
 import javafx.collections.FXCollections;
@@ -14,7 +15,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -66,6 +69,12 @@ public class SalesController implements Initializable {
 
     @FXML
     private Button backButton;
+
+    @FXML
+    private Button exportCsvButton;
+
+    @FXML
+    private Button exportPdfButton;
 
     private SaleDAO saleDAO = new SaleDAO();
     private ProductDAO productDAO = new ProductDAO();
@@ -311,6 +320,56 @@ public class SalesController implements Initializable {
     private void showAlert(String title, String message) {
         // Minimal refactor: delegate to shared AlertUtil
         AlertUtil.info(title, message);
+    }
+
+    @FXML
+    public void handleExportCSV(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Export Sales to CSV");
+        fileChooser.setInitialFileName("sales_report_" + java.time.LocalDateTime.now().format(
+                java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".csv");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+
+        File file = fileChooser.showSaveDialog(exportCsvButton.getScene().getWindow());
+        if (file != null) {
+            try {
+                // Export currently filtered sales
+                ExportUtil.exportToCSV(filteredSalesList, file);
+                showAlert("Export Successful", 
+                        "Sales report exported to CSV successfully!\n" +
+                        "Exported " + filteredSalesList.size() + " sales records.\n\n" +
+                        "File saved to: " + file.getAbsolutePath());
+            } catch (Exception e) {
+                showAlert("Export Failed", "Failed to export CSV: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    public void handleExportPDF(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Export Sales to PDF");
+        fileChooser.setInitialFileName("sales_report_" + java.time.LocalDateTime.now().format(
+                java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".pdf");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+
+        File file = fileChooser.showSaveDialog(exportPdfButton.getScene().getWindow());
+        if (file != null) {
+            try {
+                // Export currently filtered sales
+                ExportUtil.exportToPDF(filteredSalesList, file);
+                showAlert("Export Successful", 
+                        "Sales report exported to PDF successfully!\n" +
+                        "Exported " + filteredSalesList.size() + " sales records.\n\n" +
+                        "File saved to: " + file.getAbsolutePath());
+            } catch (Exception e) {
+                showAlert("Export Failed", "Failed to export PDF: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML

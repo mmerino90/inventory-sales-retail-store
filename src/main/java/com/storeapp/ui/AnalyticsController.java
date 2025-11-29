@@ -1,8 +1,6 @@
 package com.storeapp.ui;
 
-import com.storeapp.dao.ProductDAO;
 import com.storeapp.dao.SaleDAO;
-import com.storeapp.model.Product;
 import com.storeapp.model.Sale;
 import com.storeapp.util.SceneUtil;   // ⬅️ NEW import
 import javafx.collections.FXCollections;
@@ -21,7 +19,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class AnalyticsController implements Initializable {
 
@@ -53,7 +50,6 @@ public class AnalyticsController implements Initializable {
     private PieChart categoryPieChart;
 
     private SaleDAO saleDAO = new SaleDAO();
-    private ProductDAO productDAO = new ProductDAO();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

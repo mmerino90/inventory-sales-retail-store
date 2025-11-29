@@ -35,6 +35,11 @@
                     <Button text="APPLY" onAction="#handleFilter" style="-fx-background-color: #3182ce; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10px 18px;"/>
                     <Button text="CLEAR" onAction="#handleClearFilter" style="-fx-background-color: #718096; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10px 18px;"/>
                 </HBox>
+                <HBox spacing="10.0" alignment="CENTER_LEFT">
+                    <Label text="EXPORT:" style="-fx-font-weight: 700; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-font-size: 13px;"/>
+                    <Button fx:id="exportCsvButton" text="📄 EXPORT CSV" onAction="#handleExportCSV" style="-fx-background-color: #38a169; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10px 18px; -fx-font-size: 12px;"/>
+                    <Button fx:id="exportPdfButton" text="📑 EXPORT PDF" onAction="#handleExportPDF" style="-fx-background-color: #dd6b20; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10px 18px; -fx-font-size: 12px;"/>
+                </HBox>
             </VBox>
             
             <TableView fx:id="salesTable" style="-fx-background-radius: 12px;">

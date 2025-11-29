@@ -4,7 +4,6 @@ import com.storeapp.db.Database;
 import com.storeapp.model.Product;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
