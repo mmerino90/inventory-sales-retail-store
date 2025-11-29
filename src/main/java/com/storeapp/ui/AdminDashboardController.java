@@ -1,12 +1,10 @@
 package com.storeapp.ui;
 
+import com.storeapp.util.SceneUtil;
 import com.storeapp.util.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -16,6 +14,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AdminDashboardController implements Initializable {
+
+    private static final String APP_TITLE = "Retail Store Management System";
 
     @FXML
     private Label welcomeLabel;
@@ -41,12 +41,12 @@ public class AdminDashboardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         UserSession session = UserSession.getInstance();
-        
+
         // Set welcome message
         if (session.getCurrentUser() != null) {
             welcomeLabel.setText("Welcome, " + session.getCurrentUser().getUsername());
         }
-        
+
         // Hide/show sections based on role
         if (session.isAdmin()) {
             // Admin sees everything
@@ -87,19 +87,8 @@ public class AdminDashboardController implements Initializable {
 
     private void loadView(String fxmlPath) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
             Stage stage = (Stage) logoutButton.getScene().getWindow();
-            
-            // Get screen bounds for full-screen experience
-            javafx.stage.Screen screen = javafx.stage.Screen.getPrimary();
-            javafx.geometry.Rectangle2D bounds = screen.getVisualBounds();
-            
-            Scene scene = new Scene(root, bounds.getWidth(), bounds.getHeight());
-            scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
-            
-            stage.setScene(scene);
-            stage.setMaximized(true);
-            stage.show();
+            SceneUtil.switchScene(stage, fxmlPath, APP_TITLE);
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Error loading view: " + fxmlPath);

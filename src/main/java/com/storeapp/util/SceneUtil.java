@@ -7,42 +7,30 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+public class SceneUtil {
 
-/**
- * Utility class to centralize JavaFX scene loading and window configuration.
- */
-public final class SceneUtil {
-
-    private static final String STYLESHEET_PATH = "/application.css";
+    private static final String STYLESHEET = "/application.css";
 
     private SceneUtil() {
-        // Utility class - no instances
+        // utility class, no instances
     }
 
-    /**
-     * Loads an FXML view into the given stage, applies global stylesheets,
-     * and sizes the window to the current screen.
-     *
-     * @param stage    the target Stage
-     * @param fxmlPath path to the FXML resource (e.g. "/fxml/login.fxml")
-     * @param title    window title
-     * @throws IOException if the FXML cannot be loaded
-     */
-    public static void switchScene(Stage stage, String fxmlPath, String title) throws IOException {
-        FXMLLoader loader = new FXMLLoader(SceneUtil.class.getResource(fxmlPath));
-        Parent root = loader.load();
+    public static void switchScene(Stage stage, String fxmlPath, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(SceneUtil.class.getResource(fxmlPath));
+            Parent root = loader.load();
 
-        Screen screen = Screen.getPrimary();
-        Rectangle2D bounds = screen.getVisualBounds();
+            Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
+            Scene scene = new Scene(root, bounds.getWidth(), bounds.getHeight());
+            scene.getStylesheets().add(SceneUtil.class.getResource(STYLESHEET).toExternalForm());
 
-        Scene scene = new Scene(root, bounds.getWidth(), bounds.getHeight());
-        scene.getStylesheets().add(SceneUtil.class.getResource(STYLESHEET_PATH).toExternalForm());
-
-        stage.setTitle(title);
-        stage.setScene(scene);
-        stage.setMaximized(true);
-        stage.setResizable(true);
-        stage.show();
+            stage.setTitle(title);
+            stage.setScene(scene);
+            stage.setMaximized(true);
+            stage.show();
+        } catch (Exception e) {
+            System.err.println("Failed to load FXML: " + fxmlPath);
+            e.printStackTrace();
+        }
     }
 }

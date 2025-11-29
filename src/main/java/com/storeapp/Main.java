@@ -6,13 +6,12 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    private static final String APP_TITLE = "Retail Store Management System";
+
     @Override
     public void start(Stage primaryStage) {
-        SceneUtil.switchScene(primaryStage, "/fxml/login.fxml");
-        primaryStage.setTitle("Retail Store Management System");
-        primaryStage.setMaximized(true);
-        primaryStage.setResizable(true);
-        primaryStage.show();
+        // Use shared helper to load the initial login view
+        SceneUtil.switchScene(primaryStage, "/fxml/login.fxml", APP_TITLE);
     }
 
     public static void main(String[] args) {
