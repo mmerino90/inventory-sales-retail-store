@@ -11,8 +11,8 @@
                 <padding>
                     <Insets bottom="20.0" left="30.0" right="30.0" top="20.0"/>
                 </padding>
-                <Button fx:id="backButton" text="[ BACK ]" onAction="#handleBack" style="-fx-background-color: rgba(255,255,255,0.95); -fx-text-fill: #667eea; -fx-font-weight: bold; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-background-radius: 8px; -fx-padding: 10px 20px;"/>
-                <Label text="[ PRODUCT MANAGEMENT ]" style="-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
+                <Button fx:id="backButton" text="BACK" onAction="#handleBack" style="-fx-background-color: rgba(255,255,255,0.95); -fx-text-fill: #667eea; -fx-font-weight: bold; -fx-font-family: 'Consolas', 'Courier New', monospace; -fx-background-radius: 8px; -fx-padding: 10px 20px;"/>
+                <Label text="PRODUCT MANAGEMENT" style="-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
             </HBox>
         </VBox>
     </top>
@@ -51,7 +51,7 @@
                 <Insets bottom="15.0" left="30.0" right="30.0" top="15.0"/>
             </padding>
             
-            <Label text="[ PRODUCT DETAILS ]" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2d3748; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
+            <Label text="PRODUCT DETAILS" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2d3748; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
             
             <GridPane hgap="15.0" vgap="15.0">
                 <columnConstraints>
@@ -81,10 +81,10 @@
                 <padding>
                     <Insets top="10.0"/>
                 </padding>
-                <Button fx:id="addButton" text="[ ADD PRODUCT ]" onAction="#handleAdd" style="-fx-min-width: 160px; -fx-min-height: 45px; -fx-background-color: #48bb78;"/>
-                <Button fx:id="updateButton" text="[ UPDATE ]" onAction="#handleUpdate" style="-fx-min-width: 160px; -fx-min-height: 45px; -fx-background-color: #4299e1;"/>
-                <Button fx:id="deleteButton" text="[ DELETE ]" onAction="#handleDelete" style="-fx-min-width: 160px; -fx-min-height: 45px; -fx-background-color: #f56565;"/>
-                <Button fx:id="clearButton" text="[ CLEAR FORM ]" onAction="#handleClear" style="-fx-min-width: 160px; -fx-min-height: 45px; -fx-background-color: #718096;"/>
+                <Button fx:id="addButton" text="ADD PRODUCT" onAction="#handleAdd" style="-fx-min-width: 160px; -fx-min-height: 45px; -fx-background-color: #48bb78;"/>
+                <Button fx:id="updateButton" text="UPDATE" onAction="#handleUpdate" style="-fx-min-width: 160px; -fx-min-height: 45px; -fx-background-color: #4299e1;"/>
+                <Button fx:id="deleteButton" text="DELETE" onAction="#handleDelete" style="-fx-min-width: 160px; -fx-min-height: 45px; -fx-background-color: #f56565;"/>
+                <Button fx:id="clearButton" text="CLEAR FORM" onAction="#handleClear" style="-fx-min-width: 160px; -fx-min-height: 45px; -fx-background-color: #718096;"/>
             </HBox>
         </VBox>
     </bottom>
