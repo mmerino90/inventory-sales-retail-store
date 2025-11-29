@@ -2,18 +2,21 @@ package com.storeapp.ui;
 
 import com.storeapp.dao.UserDAO;
 import com.storeapp.model.User;
+import com.storeapp.util.SceneUtil;
 import com.storeapp.util.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
 public class LoginController {
+
+    private static final String APP_TITLE = "Retail Store Management System";
 
     @FXML
     private TextField usernameField;
@@ -27,7 +30,7 @@ public class LoginController {
     @FXML
     private Label messageLabel;
 
-    private UserDAO userDAO = new UserDAO();
+    private final UserDAO userDAO = new UserDAO();
 
     @FXML
     public void handleLogin(ActionEvent event) {
@@ -57,21 +60,10 @@ public class LoginController {
         try {
             // Set current user in session
             UserSession.getInstance().setCurrentUser(user);
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin_dashboard.fxml"));
-            Parent root = loader.load();
+
             Stage stage = (Stage) loginButton.getScene().getWindow();
-            
-            // Get screen bounds for full-screen experience
-            javafx.stage.Screen screen = javafx.stage.Screen.getPrimary();
-            javafx.geometry.Rectangle2D bounds = screen.getVisualBounds();
-            
-            Scene scene = new Scene(root, bounds.getWidth(), bounds.getHeight());
-            scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
-            
-            stage.setScene(scene);
-            stage.setMaximized(true);
-            stage.show();
+            SceneUtil.switchScene(stage, "/fxml/admin_dashboard.fxml", APP_TITLE);
+
             System.out.println("Dashboard loaded successfully for user: " + user.getUsername());
         } catch (Exception e) {
             messageLabel.setText("Error loading dashboard: " + e.getMessage());
