@@ -1,0 +1,214 @@
+/* Dark Theme Stylesheet */
+
+/* ===== ROOT & GENERAL ===== */
+.root {
+    -fx-font-family: "Consolas", "Courier New", "Roboto Mono", monospace;
+    -fx-background-color: linear-gradient(to bottom, #1a1a2e, #16213e);
+    -fx-font-size: 14px;
+}
+
+/* ===== BUTTONS ===== */
+.button {
+    -fx-background-color: linear-gradient(to bottom, #0f4c75, #1b6ca8);
+    -fx-text-fill: #e0e0e0;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Consolas", "Courier New", monospace;
+    -fx-padding: 14px 28px;
+    -fx-cursor: hand;
+    -fx-background-radius: 6px;
+    -fx-border-radius: 6px;
+    -fx-border-color: #0a3b5e;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0, 0, 3);
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #1b6ca8, #2196f3);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 12, 0, 0, 4);
+    -fx-scale-y: 1.03;
+    -fx-scale-x: 1.03;
+}
+
+.button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #0a3b5e, #0f4c75);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 6, 0, 0, 2);
+    -fx-translate-y: 1px;
+}
+
+/* ===== TABLE VIEW ===== */
+.table-view {
+    -fx-background-color: #1e1e2f;
+    -fx-background-radius: 8px;
+    -fx-padding: 0px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 15, 0, 0, 3);
+    -fx-border-color: #2a2a3e;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom, #0f4c75, #0a3b5e);
+    -fx-background-radius: 7px 7px 0 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-text-fill: #e0e0e0;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-font-family: "Consolas", "Courier New", monospace;
+    -fx-padding: 14px 10px;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #e0e0e0;
+    -fx-font-weight: bold;
+    -fx-font-family: "Consolas", "Courier New", monospace;
+}
+
+.table-view .table-cell {
+    -fx-padding: 12px 10px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Consolas", "Courier New", monospace;
+    -fx-border-color: transparent transparent #2a2a3e transparent;
+    -fx-border-width: 0 0 1px 0;
+    -fx-text-fill: #d0d0d0;
+}
+
+.table-row-cell {
+    -fx-background-color: #1e1e2f;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #252538;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #1b5e85;
+    -fx-text-fill: #ffffff;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #2a3f5f;
+}
+
+.table-view .filler {
+    -fx-background-color: #1e1e2f;
+}
+
+/* ===== INPUT FIELDS ===== */
+.text-field, .password-field, .combo-box {
+    -fx-padding: 14px 16px;
+    -fx-font-size: 15px;
+    -fx-font-family: "Consolas", "Courier New", monospace;
+    -fx-background-color: #2a2a3e;
+    -fx-background-radius: 6px;
+    -fx-border-color: #3e3e5e;
+    -fx-border-width: 2px;
+    -fx-border-radius: 6px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0, 0, 2);
+    -fx-text-fill: #e0e0e0;
+}
+
+.text-field:focused, .password-field:focused, .combo-box:focused {
+    -fx-border-color: #0f4c75;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(15,76,117,0.6), 10, 0, 0, 3);
+    -fx-background-color: #33334e;
+}
+
+.combo-box .list-cell {
+    -fx-padding: 12px;
+    -fx-font-family: "Consolas", "Courier New", monospace;
+    -fx-background-color: #2a2a3e;
+    -fx-text-fill: #e0e0e0;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #2a2a3e;
+    -fx-border-color: #3e3e5e;
+}
+
+/* ===== LABELS ===== */
+.label {
+    -fx-font-size: 15px;
+    -fx-font-family: "Consolas", "Courier New", monospace;
+    -fx-text-fill: #d0d0d0;
+}
+
+.label.title {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Consolas", "Courier New", monospace;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);
+}
+
+.label.subtitle {
+    -fx-font-size: 20px;
+    -fx-font-weight: 600;
+    -fx-font-family: "Consolas", "Courier New", monospace;
+    -fx-text-fill: #b0b0c0;
+}
+
+/* ===== SCROLL BAR ===== */
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #4a4a6a;
+    -fx-background-radius: 4px;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #5a5a7a;
+}
+
+.scroll-bar .track {
+    -fx-background-color: #2a2a3e;
+    -fx-background-radius: 4px;
+}
+
+/* ===== CHARTS ===== */
+.chart {
+    -fx-background-color: #1e1e2f;
+    -fx-background-radius: 8px;
+    -fx-padding: 24px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 15, 0, 0, 3);
+    -fx-border-color: #2a2a3e;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+}
+
+.chart-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Consolas", "Courier New", monospace;
+    -fx-text-fill: #e0e0e0;
+}
+
+.chart-legend {
+    -fx-background-color: #252538;
+    -fx-background-radius: 6px;
+    -fx-padding: 12px;
+    -fx-font-family: "Consolas", "Courier New", monospace;
+}
+
+.chart-legend-item-text {
+    -fx-font-family: "Consolas", "Courier New", monospace;
+    -fx-font-size: 13px;
+    -fx-text-fill: #d0d0d0;
+}
+
+/* ===== SPECIAL DARK MODE ADJUSTMENTS ===== */
+.vbox, .hbox, .border-pane, .stack-pane {
+    -fx-text-fill: #d0d0d0;
+}
+
+/* Specific adjustments for dashboard cards */
+VBox[style*="white"] {
+    -fx-background-color: #1e1e2f !important;
+    -fx-border-color: #2a2a3e !important;
+}

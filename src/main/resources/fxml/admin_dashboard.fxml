@@ -19,6 +19,7 @@
                 </Label>
                 <Region HBox.hgrow="ALWAYS"/>
                 <Label fx:id="welcomeLabel" text="WELCOME" textFill="WHITE" style="-fx-font-size: 16px; -fx-font-weight: 700; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
+                <Button fx:id="themeToggleButton" onAction="#handleThemeToggle" style="-fx-background-color: #4b5563; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8px 16px; -fx-background-radius: 6px; -fx-font-size: 16px;"/>
                 <Button fx:id="logoutButton" text="LOGOUT" onAction="#handleLogout" style="-fx-background-color: #dc2626; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8px 16px; -fx-background-radius: 6px; -fx-font-size: 13px;"/>
             </HBox>
         </VBox>
@@ -55,6 +56,14 @@
                     <Label text="👥" style="-fx-font-size: 48px;"/>
                     <Button fx:id="usersButton" text="MANAGE USERS" onAction="#handleUsers" minWidth="240.0" style="-fx-min-height: 50px;"/>
                     <Label text="STAFF &amp; PERMISSIONS" style="-fx-text-fill: #6b7280; -fx-font-size: 11px; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
+                </VBox>
+            </HBox>
+            
+            <HBox fx:id="auditLogSection" spacing="30.0" alignment="CENTER" managed="false" visible="false">
+                <VBox alignment="CENTER" spacing="12.0" style="-fx-background-color: white; -fx-background-radius: 12px; -fx-padding: 40px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 18, 0, 0, 4); -fx-border-color: #d1d5db; -fx-border-width: 2px; -fx-border-radius: 12px;">
+                    <Label text="📋" style="-fx-font-size: 48px;"/>
+                    <Button fx:id="auditLogButton" text="VIEW AUDIT LOG" onAction="#handleAuditLog" minWidth="240.0" style="-fx-min-height: 50px;"/>
+                    <Label text="ACTIVITY HISTORY" style="-fx-text-fill: #6b7280; -fx-font-size: 11px; -fx-font-family: 'Consolas', 'Courier New', monospace;"/>
                 </VBox>
             </HBox>
         </VBox>

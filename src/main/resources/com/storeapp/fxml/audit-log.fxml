@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.storeapp.ui.AuditLogController" spacing="10" style="-fx-padding: 20;">
+
+    <Label text="Audit Log - Activity History" style="-fx-font-size: 24; -fx-font-weight: bold;"/>
+    
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Filter by Entity:"/>
+        <ComboBox fx:id="entityTypeComboBox" promptText="All" prefWidth="150">
+            <items>
+                <javafx.collections.FXCollections fx:factory="observableArrayList">
+                    <String fx:value="All"/>
+                    <String fx:value="Product"/>
+                    <String fx:value="Sale"/>
+                </javafx.collections.FXCollections>
+            </items>
+        </ComboBox>
+        
+        <Label text="Action:"/>
+        <ComboBox fx:id="actionComboBox" promptText="All" prefWidth="150">
+            <items>
+                <javafx.collections.FXCollections fx:factory="observableArrayList">
+                    <String fx:value="All"/>
+                    <String fx:value="CREATE"/>
+                    <String fx:value="UPDATE"/>
+                    <String fx:value="DELETE"/>
+                </javafx.collections.FXCollections>
+            </items>
+        </ComboBox>
+        
+        <Button text="Apply Filter" onAction="#handleFilter"/>
+        <Button text="Clear Filter" onAction="#handleClearFilter"/>
+        <Button text="Refresh" onAction="#handleRefresh"/>
+    </HBox>
+
+    <TableView fx:id="auditLogTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="timestampColumn" text="Timestamp" prefWidth="150"/>
+            <TableColumn fx:id="usernameColumn" text="User" prefWidth="100"/>
+            <TableColumn fx:id="actionColumn" text="Action" prefWidth="80"/>
+            <TableColumn fx:id="entityTypeColumn" text="Entity Type" prefWidth="100"/>
+            <TableColumn fx:id="entityIdColumn" text="Entity ID" prefWidth="80"/>
+            <TableColumn fx:id="oldValueColumn" text="Old Value" prefWidth="200"/>
+            <TableColumn fx:id="newValueColumn" text="New Value" prefWidth="200"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Label fx:id="statusLabel" text=""/>
+    </HBox>
+
+</VBox>
