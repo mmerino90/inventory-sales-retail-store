@@ -12,6 +12,7 @@ Should show Java 21 or higher.
 
 ### Step 2: Run the app
 **Windows**: Double-click `run-app.bat`
+**Mac/Linux**: Run `./run-app.sh` in terminal
 
 **OR from any terminal**:
 ```bash
