@@ -85,42 +85,51 @@ public class AnalyticsController implements Initializable {
     }
 
     private void loadUnitsSoldChart() {
-        try {
-            List<Sale> allSales = saleDAO.getAllSales();
+        javafx.application.Platform.runLater(() -> {
+            try {
+                List<Sale> allSales = saleDAO.getAllSales();
 
-            Map<Integer, Integer> productSales = new HashMap<>();
-            Map<Integer, String> productNames = new HashMap<>();
+                Map<Integer, Integer> productSales = new HashMap<>();
+                Map<Integer, String> productNames = new HashMap<>();
 
-            for (Sale sale : allSales) {
-                productSales.merge(sale.getProductId(), sale.getQuantity(), Integer::sum);
-                if (!productNames.containsKey(sale.getProductId())) {
-                    productNames.put(sale.getProductId(), sale.getProductName());
+                for (Sale sale : allSales) {
+                    productSales.merge(sale.getProductId(), sale.getQuantity(), Integer::sum);
+                    if (!productNames.containsKey(sale.getProductId())) {
+                        productNames.put(sale.getProductId(), sale.getProductName());
+                    }
                 }
+
+                unitsBarChart.setAnimated(false);
+                unitsBarChart.getData().clear();
+                xAxis.getCategories().clear();
+
+                XYChart.Series<String, Number> series = new XYChart.Series<>();
+                series.setName("Units Sold");
+
+                productSales.entrySet().stream()
+                        .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
+                        .limit(10)
+                        .forEach(entry -> {
+                            String productName = productNames.getOrDefault(entry.getKey(), "Unknown");
+                            String truncatedName = productName.length() > 15 ? productName.substring(0, 12) + "..."
+                                    : productName;
+                            String displayName = truncatedName + " (" + entry.getValue() + ")";
+
+                            series.getData().add(new XYChart.Data<>(displayName, entry.getValue()));
+                        });
+
+                unitsBarChart.getData().add(series);
+                unitsBarChart.setLegendVisible(false);
+
+                xAxis.setTickLabelsVisible(true);
+                xAxis.setTickLabelFill(javafx.scene.paint.Color.BLACK);
+                xAxis.setTickLabelRotation(0);
+                xAxis.setLabel("Product Name");
+
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-
-            XYChart.Series<String, Number> series = new XYChart.Series<>();
-            series.setName("Units Sold");
-
-            productSales.entrySet().stream()
-                    .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
-                    .limit(10)
-                    .forEach(entry -> {
-                        String productName = productNames.getOrDefault(entry.getKey(), "Unknown");
-                        String displayName = productName.length() > 15 ? productName.substring(0, 12) + "..." : productName;
-                        series.getData().add(new XYChart.Data<>(displayName, entry.getValue()));
-                    });
-
-            unitsBarChart.getData().clear();
-            unitsBarChart.getData().add(series);
-            unitsBarChart.setLegendVisible(false);
-
-            xAxis.setLabel("Product Name");
-            yAxis.setLabel("Units Sold");
-            xAxis.setTickLabelRotation(45);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        });
     }
 
     private void loadCategoryPieChart() {
@@ -149,9 +158,8 @@ public class AnalyticsController implements Initializable {
             categoryQuantities.forEach((category, quantity) -> {
                 double percentage = (quantity * 100.0) / totalQuantity;
                 pieChartData.add(new PieChart.Data(
-                        category + " (" + String.format("%.1f%%", percentage) + ")",
-                        quantity
-                ));
+                        category + ": " + quantity + " units (" + String.format("%.1f%%", percentage) + ")",
+                        quantity));
             });
 
             categoryPieChart.setData(pieChartData);
