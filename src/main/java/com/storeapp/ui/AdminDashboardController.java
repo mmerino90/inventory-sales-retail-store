@@ -18,6 +18,9 @@ public class AdminDashboardController implements Initializable {
     private static final String APP_TITLE = "Retail Store Management System";
 
     @FXML
+    private Label dashboardTitleLabel;
+
+    @FXML
     private Label welcomeLabel;
 
     @FXML
@@ -41,6 +44,13 @@ public class AdminDashboardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         UserSession session = UserSession.getInstance();
+
+        // Set dashboard title based on role
+        if (session.isAdmin()) {
+            dashboardTitleLabel.setText("[ ADMIN DASHBOARD ]");
+        } else {
+            dashboardTitleLabel.setText("[ EMPLOYEE DASHBOARD ]");
+        }
 
         if (session.getCurrentUser() != null) {
             welcomeLabel.setText("Welcome, " + session.getCurrentUser().getUsername());
